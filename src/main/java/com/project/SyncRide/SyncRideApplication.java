@@ -9,5 +9,4 @@ public class SyncRideApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(SyncRideApplication.class, args);
 	}
-
 }
