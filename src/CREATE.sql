@@ -13,6 +13,8 @@ CREATE TABLE users (
     password VARCHAR(255) NOT NULL,
     city_id INT,
     role ENUM('ROLE_USER', 'ROLE_ADMIN') DEFAULT 'ROLE_USER',
+    email_verified boolean DEFAULT false,
+	confirmation_token varchar(255) DEFAULT NULL,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     FOREIGN KEY (city_id) REFERENCES cities(city_id)
 );

@@ -14,6 +14,8 @@ public class User {
     private String password;
     private int cityId;
     private String role;
+    private boolean emailVerified;
+    private String confirmationToken;
     private Timestamp createdAt;
 
     private City city;
@@ -88,6 +90,22 @@ public class User {
 
     public void setRole(String role) {
         this.role = role;
+    }
+
+    public boolean isEmailVerified() {
+        return emailVerified;
+    }
+
+    public void setEmailVerified(boolean emailVerified) {
+        this.emailVerified = emailVerified;
+    }
+
+    public String getConfirmationToken() {
+        return confirmationToken;
+    }
+
+    public void setConfirmationToken(String confirmationToken) {
+        this.confirmationToken = confirmationToken;
     }
 
     public Timestamp getCreatedAt() {
