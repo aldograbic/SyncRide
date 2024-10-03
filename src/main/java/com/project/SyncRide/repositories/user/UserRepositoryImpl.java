@@ -1,10 +1,13 @@
 package com.project.SyncRide.repositories.user;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
 import com.project.SyncRide.models.user.User;
+import com.project.SyncRide.models.user.UserRowMapper;
 
 @Repository
 public class UserRepositoryImpl implements UserRepository{
@@ -14,7 +17,7 @@ public class UserRepositoryImpl implements UserRepository{
 
     @Override
     public User findByEmail(String email) {
-        String sql = "SELECT user_id, email, full_name, password, gender, phone, role, created_at, confirmation_token, email_verified FROM users WHERE email = ?";
+        String sql = "SELECT user_id, email, first_name, last_name, password, gender, phone, role, created_at, confirmation_token, email_verified FROM users WHERE email = ?";
         List<User> users = jdbcTemplate.query(sql, new UserRowMapper(), email);
         return users.isEmpty() ? null : users.get(0);
     }
@@ -22,13 +25,13 @@ public class UserRepositoryImpl implements UserRepository{
     @Override
     public boolean existsByEmail(String email) {
         String sql = "SELECT COUNT(*) FROM users WHERE email = ?";
-        Integer count = jdbcTemplate.queryForObject(sql, new Object[]{email}, Integer.class);
+        Integer count = jdbcTemplate.queryForObject(sql, Integer.class, email);
         return count != null && count > 0;
     }
 
     @Override
     public User findByConfirmationToken(String token) {
-        String sql = "SELECT user_id, email, full_name, password, gender, phone, role, created_at, confirmation_token, email_verified FROM users WHERE confirmation_token = ?";
+        String sql = "SELECT user_id, email, first_name, last_name, password, gender, phone, role, created_at, confirmation_token, email_verified FROM users WHERE confirmation_token = ?";
         List<User> users = jdbcTemplate.query(sql, new UserRowMapper(), token);
         return users.isEmpty() ? null : users.get(0);
     }
@@ -41,8 +44,8 @@ public class UserRepositoryImpl implements UserRepository{
 
     @Override
     public void update(User user) {
-        String sql = "UPDATE users SET full_name = ?, password = ?, phone = ?, gender = ?";
-        jdbcTemplate.update(sql, user.getFullName(), user.getPassword(), user.getPhone(), user.getGender());
+        String sql = "UPDATE users SET first_name = ?, last_name = ?, password = ?, phone = ?";
+        jdbcTemplate.update(sql, user.getFirstName(), user.getLastName(), user.getPassword(), user.getPhone());
     }
 
     @Override
@@ -53,13 +56,13 @@ public class UserRepositoryImpl implements UserRepository{
 
     @Override
     public void saveFull(User user) {
-        String sql = "UPDATE users SET full_name = ?, password = ?";
-        jdbcTemplate.update(sql, user.getFullName(), user.getPassword());
+        String sql = "UPDATE users SET first_name = ?, last_name = ?, password = ?";
+        jdbcTemplate.update(sql, user.getFirstName(), user.getLastName(), user.getPassword());
     }
 
     @Override
     public User findById(Long userId) {
-        String sql = "SELECT user_id, email, full_name, password, gender, phone, role, created_at, confirmation_token, email_verified FROM users WHERE user_id = ?";
+        String sql = "SELECT user_id, email, first_name, last_name, password, gender, phone, role, created_at, confirmation_token, email_verified FROM users WHERE user_id = ?";
         List<User> users = jdbcTemplate.query(sql, new UserRowMapper(), userId);
         return users.isEmpty() ? null : users.get(0);
     }
