@@ -1,24 +1,22 @@
-<!-- ========== HEADER ========== -->
 <header
   th:fragment="header"
-  class="sticky top-0 inset-x-0 flex flex-wrap md:justify-start md:flex-nowrap z-50 w-full text-sm"
+  class="sticky top-0 inset-x-0 px-20 flex items-center justify-between md:flex-nowrap z-50 w-full text-sm bg-white dark:bg-neutral-900"
 >
+  <!-- Logo -->
+  <a
+    class="flex-none rounded-md text-xl inline-block font-semibold focus:outline-none focus:opacity-80 dark:text-neutral-100"
+    href="/"
+    aria-label="SyncRide"
+  >
+    SyncRide
+  </a>
+  <!-- End Logo -->
+
+  <!-- Centered Nav -->
   <nav
-    class="mt-4 relative max-w-2xl w-full bg-white border border-gray-200 rounded-[2rem] mx-2 py-2.5 md:flex md:items-center md:justify-between md:py-0 md:px-4 md:mx-auto dark:bg-neutral-900 dark:border-neutral-700"
+    class="m-4 relative flex-grow max-w-sm w-full border border-gray-200 rounded-[2rem] mx-2 py-2.5 md:py-0 md:px-4 text-center md:mx-auto dark:border-neutral-700"
   >
     <div class="px-4 md:px-0 flex justify-between items-center">
-      <!-- Logo -->
-      <div>
-        <a
-          class="flex-none rounded-md text-xl inline-block font-semibold focus:outline-none focus:opacity-80 dark:text-neutral-100"
-          href="/"
-          aria-label="SyncRide"
-        >
-          SyncRide
-        </a>
-      </div>
-      <!-- End Logo -->
-
       <div class="md:hidden">
         <!-- Toggle Button -->
         <button
@@ -72,31 +70,101 @@
       aria-labelledby="hs-navbar-header-floating-collapse"
     >
       <div
-        class="flex flex-col md:flex-row md:items-center md:justify-end gap-2 md:gap-3 mt-3 md:mt-0 py-2 md:py-0 md:ps-7"
+        class="flex flex-col md:flex-row md:items-center md:justify-around gap-2 md:gap-3 mt-3 md:mt-0 py-2 md:py-0"
       >
         <a
           class="py-0.5 md:py-3 px-4 md:px-1 border-s-2 md:border-s-0 md:border-b-2 border-gray-800 font-medium text-gray-800 focus:outline-none dark:border-neutral-200 dark:text-neutral-200"
           href="#"
           aria-current="page"
-          >Home</a
         >
+          Find
+        </a>
         <a
           class="py-0.5 md:py-3 px-4 md:px-1 border-s-2 md:border-s-0 md:border-b-2 border-transparent text-gray-500 hover:text-gray-800 focus:outline-none dark:text-neutral-400 dark:hover:text-neutral-200"
           href="#"
-          >Projects</a
         >
+          Offer Ride
+        </a>
         <a
           class="py-0.5 md:py-3 px-4 md:px-1 border-s-2 md:border-s-0 md:border-b-2 border-transparent text-gray-500 hover:text-gray-800 focus:outline-none dark:text-neutral-400 dark:hover:text-neutral-200"
           href="#"
-          >Work</a
         >
-        <a
-          class="py-0.5 md:py-3 px-4 md:px-1 border-s-2 md:border-s-0 md:border-b-2 border-transparent text-gray-500 hover:text-gray-800 focus:outline-none dark:text-neutral-400 dark:hover:text-neutral-200"
-          href="#"
-          >Articles</a
-        >
+          My Trips
+        </a>
       </div>
     </div>
   </nav>
+  <!-- End Nav -->
+
+  <!-- Profile -->
+  <div class="hs-dropdown relative inline-flex">
+    <button
+      id="hs-dropdown-custom-trigger"
+      type="button"
+      class="hs-dropdown-toggle py-2 ps-2 pe-2 inline-flex items-center gap-x-2 text-sm font-medium rounded-full border border-gray-200 bg-white text-gray-800 shadow-sm hover:bg-gray-50 focus:outline-none focus:bg-gray-50 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-900 dark:border-neutral-700 dark:text-white dark:hover:bg-neutral-800 dark:focus:bg-neutral-800"
+      aria-haspopup="menu"
+      aria-expanded="false"
+      aria-label="Dropdown"
+    >
+      <img
+        class="w-8 h-auto rounded-full"
+        src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=facearea&facepad=2&w=300&h=300&q=80"
+        alt="Avatar"
+      />
+      <span
+        class="text-gray-600 font-medium truncate max-w-[5rem] dark:text-neutral-400"
+      >
+        Maria
+      </span>
+      <svg
+        class="hs-dropdown-open:rotate-180 size-4"
+        xmlns="http://www.w3.org/2000/svg"
+        width="24"
+        height="24"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+      >
+        <path d="m6 9 6 6 6-6" />
+      </svg>
+    </button>
+
+    <div
+      class="hs-dropdown-menu transition-[opacity,margin] duration hs-dropdown-open:opacity-100 opacity-0 hidden min-w-60 bg-white shadow-md rounded-lg mt-2 dark:bg-neutral-800 dark:border dark:border-neutral-700"
+      role="menu"
+      aria-orientation="vertical"
+      aria-labelledby="hs-dropdown-custom-trigger"
+    >
+      <div class="p-1 space-y-0.5">
+        <a
+          class="flex items-center gap-x-3.5 py-2 px-3 rounded-lg text-sm text-gray-800 hover:bg-gray-100 focus:outline-none focus:bg-gray-100 dark:text-neutral-400 dark:hover:bg-neutral-700 dark:hover:text-neutral-300 dark:focus:bg-neutral-700"
+          href="#"
+        >
+          Newsletter
+        </a>
+        <a
+          class="flex items-center gap-x-3.5 py-2 px-3 rounded-lg text-sm text-gray-800 hover:bg-gray-100 focus:outline-none focus:bg-gray-100 dark:text-neutral-400 dark:hover:bg-neutral-700 dark:hover:text-neutral-300 dark:focus:bg-neutral-700"
+          href="#"
+        >
+          Purchases
+        </a>
+        <a
+          class="flex items-center gap-x-3.5 py-2 px-3 rounded-lg text-sm text-gray-800 hover:bg-gray-100 focus:outline-none focus:bg-gray-100 dark:text-neutral-400 dark:hover:bg-neutral-700 dark:hover:text-neutral-300 dark:focus:bg-neutral-700"
+          href="#"
+        >
+          Downloads
+        </a>
+        <a
+          class="flex items-center gap-x-3.5 py-2 px-3 rounded-lg text-sm text-gray-800 hover:bg-gray-100 focus:outline-none focus:bg-gray-100 dark:text-neutral-400 dark:hover:bg-neutral-700 dark:hover:text-neutral-300 dark:focus:bg-neutral-700"
+          href="#"
+        >
+          Team Account
+        </a>
+      </div>
+    </div>
+  </div>
+  <!-- End Profile -->
 </header>
-<!-- ========== END HEADER ========== -->
