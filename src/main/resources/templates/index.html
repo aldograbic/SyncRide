@@ -8,12 +8,13 @@
   <body class="min-h-[120vh]">
     <th:block th:insert="~{fragments/header :: header}"></th:block>
     <main>
-      <body x-data="{ rides: [], userLocation: null }">
-        <div id="map" style="height: 500px"></div>
+      <div x-data="{ rides: [], userLocation: null }" class="grid grid-cols-2">
+        <div></div>
+        <div id="map" class="min-h-screen"></div>
 
         <script>
           document.addEventListener("DOMContentLoaded", function () {
-            const map = L.map("map").setView([0, 0], 12); // Default view
+            const map = L.map("map").setView([0, 0], 12);
 
             L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
               maxZoom: 18,
@@ -53,7 +54,7 @@
             }
           });
         </script>
-      </body>
+      </div>
     </main>
   </body>
 </html>
