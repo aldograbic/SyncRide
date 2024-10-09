@@ -10,15 +10,20 @@
     <main>
       <div x-data="{ rides: [], userLocation: null }" class="grid grid-cols-2">
         <div></div>
-        <div id="map" class="min-h-screen"></div>
+        <div id="map" class="min-h-screen z-0"></div>
 
         <script>
           document.addEventListener("DOMContentLoaded", function () {
             const map = L.map("map").setView([0, 0], 12);
 
-            L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
-              maxZoom: 18,
-            }).addTo(map);
+            L.tileLayer(
+              "https://tiles.stadiamaps.com/tiles/alidade_smooth_dark/{z}/{x}/{y}{r}.png",
+              {
+                maxZoom: 18,
+                attribution:
+                  '&copy; <a href="https://stadiamaps.com/">Stadia Maps</a> contributors',
+              }
+            ).addTo(map);
 
             if (navigator.geolocation) {
               navigator.geolocation.getCurrentPosition(function (position) {
