@@ -38,23 +38,23 @@
                   .bindPopup("You are here")
                   .openPopup();
 
-                fetch(
-                  `/api/rides/nearby?lat=${userLatLng[0]}&lng=${userLatLng[1]}`
-                )
-                  .then((response) => response.json())
-                  .then((data) => {
-                    data.forEach((ride) => {
-                      const rideLatLng = [
-                        ride.startLatitude,
-                        ride.startLongitude,
-                      ];
-                      L.marker(rideLatLng)
-                        .addTo(map)
-                        .bindPopup(
-                          `<b>Ride from: </b>${ride.startLocation}<br><b>To: </b>${ride.endLocation}`
-                        );
-                    });
-                  });
+                // fetch(
+                //   `/api/rides/nearby?lat=${userLatLng[0]}&lng=${userLatLng[1]}`
+                // )
+                //   .then((response) => response.json())
+                //   .then((data) => {
+                //     data.forEach((ride) => {
+                //       const rideLatLng = [
+                //         ride.startLatitude,
+                //         ride.startLongitude,
+                //       ];
+                //       L.marker(rideLatLng)
+                //         .addTo(map)
+                //         .bindPopup(
+                //           `<b>Ride from: </b>${ride.startLocation}<br><b>To: </b>${ride.endLocation}`
+                //         );
+                //     });
+                //   });
               });
             }
           });
