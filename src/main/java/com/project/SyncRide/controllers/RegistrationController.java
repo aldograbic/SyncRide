@@ -1,5 +1,6 @@
 package com.project.SyncRide.controllers;
 
+import java.io.IOException;
 import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -62,8 +63,7 @@ public class RegistrationController {
             user.setPassword(encyptedPassword);
             user.setFullName(fullName);
             user.setConfirmationToken(null);
-            userRepository.saveFull(user);
-
+            
             String profilePictureUrl = null;
             if (profilePicture != null && !profilePicture.isEmpty()) {
                 try {
@@ -74,11 +74,9 @@ public class RegistrationController {
                 }
             }
 
-            UserProfile userProfile = new UserProfile();
-            userProfile.setUserId(user.getUserId());
-            userProfile.setBio(bio);
-            userProfile.setProfilePicture(profilePictureUrl);
-            userRepository.saveUserProfileDetails(userProfile);
+            user.setBio(bio);
+            user.setProfilePicture(profilePictureUrl);
+            userRepository.saveFull(user);
 
             model.addAttribute("success", "Registracija završena! Sada se možete prijaviti.");
             return "login";

@@ -17,6 +17,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.project.SyncRide.models.user.User;
 import com.project.SyncRide.repositories.user.UserRepository;
+import com.project.SyncRide.services.FileUploadService;
 
 @Controller
 @RequestMapping("/account")
@@ -79,18 +80,12 @@ public class AccountController {
         authUser.setGender(gender);
         authUser.setPhone(phone);
 
-        UserProfile userProfile = userRepository.getUserProfileByUserId(authUser.getUserId());
-        if (userProfile == null) {
-            userProfile = new UserProfile();
-            userProfile.setUser(authUser);
-        }
-
-        userProfile.setProfilePicture(profilePictureUrl != null ? profilePictureUrl : userProfile.getProfilePicture());
-        userProfile.setBio(bio);
+        authUser.setProfilePicture(profilePictureUrl != null ? profilePictureUrl : authUser.getProfilePicture());
+        authUser.setBio(bio);
 
         try {
             userRepository.update(authUser);
-            userRepository.updateUserProfileDetails(userProfile);
+            
             redirectAttributes.addFlashAttribute("success", "Račun uspješno ažuriran!");
         } catch (Exception e) {
             redirectAttributes.addFlashAttribute("error", "Došlo je do pogreške prilikom ažuriranja računa.");

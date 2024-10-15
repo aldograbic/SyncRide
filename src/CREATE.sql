@@ -5,10 +5,12 @@ CREATE TABLE cities (
 
 CREATE TABLE users (
     user_id INT AUTO_INCREMENT PRIMARY KEY,
-    first_name VARCHAR(100) NOT NULL,
-    last_name VARCHAR(100) NOT NULL,
+    full_name VARCHAR(100) NOT NULL,
     address VARCHAR(50) NOT NULL,
     phone VARCHAR(15),
+    gender VARCHAR(255),
+    bio TEXT,
+    profile_picture VARCHAR(255),
     email VARCHAR(100) NOT NULL UNIQUE,
     password VARCHAR(255) NOT NULL,
     city_id INT,
