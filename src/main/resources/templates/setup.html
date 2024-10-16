@@ -7,6 +7,412 @@
   </head>
   <body>
     <th:block th:insert="~{fragments/header :: header}"></th:block>
-    <main></main>
+    <main>
+      <div class="grid md:grid-cols-2 gap-x-32">
+        <img th:src="@{/img/setup-carpool.webp}" alt="" />
+
+        <!-- Card Section -->
+        <div class="max-w-4xl px-4 py-10 sm:px-6 lg:px-8 lg:py-14 mx-auto">
+          <!-- Stepper -->
+          <div data-hs-stepper="">
+            <!-- Stepper Nav -->
+            <ul class="relative flex flex-row gap-x-2">
+              <li
+                class="flex items-center gap-x-2 shrink basis-0 flex-1 group"
+                data-hs-stepper-nav-item='{
+                  "index": 1
+                }'
+              >
+                <span
+                  class="min-w-7 min-h-7 group inline-flex items-center text-xs align-middle"
+                >
+                  <span
+                    class="size-7 flex justify-center items-center shrink-0 bg-gray-100 font-medium text-gray-800 rounded-full group-focus:bg-gray-200 hs-stepper-active:bg-emerald-400 hs-stepper-active:text-white hs-stepper-success:bg-emerald-400 hs-stepper-success:text-white hs-stepper-completed:bg-teal-500 hs-stepper-completed:group-focus:bg-teal-600 dark:bg-neutral-700 dark:text-white dark:group-focus:bg-gray-600 dark:hs-stepper-active:bg-emerald-300 dark:hs-stepper-success:bg-emerald-300 dark:hs-stepper-completed:bg-teal-500 dark:hs-stepper-completed:group-focus:bg-teal-600"
+                  >
+                    <span
+                      class="hs-stepper-success:hidden hs-stepper-completed:hidden"
+                      >1</span
+                    >
+                    <svg
+                      class="hidden shrink-0 size-3 hs-stepper-success:block"
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="24"
+                      height="24"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="3"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                    >
+                      <polyline points="20 6 9 17 4 12"></polyline>
+                    </svg>
+                  </span>
+                  <span
+                    class="ms-2 text-sm font-medium text-gray-800 dark:text-neutral-200"
+                  >
+                    Osobni podaci
+                  </span>
+                </span>
+                <div
+                  class="w-full h-px flex-1 bg-gray-200 group-last:hidden hs-stepper-success:bg-emerald-400 hs-stepper-completed:bg-teal-600 dark:bg-neutral-700 dark:hs-stepper-success:bg-emerald-400 dark:hs-stepper-completed:bg-teal-600"
+                ></div>
+              </li>
+
+              <li
+                class="flex items-center gap-x-2 shrink basis-0 flex-1 group"
+                data-hs-stepper-nav-item='{
+                  "index": 2
+                }'
+              >
+                <span
+                  class="min-w-7 min-h-7 group inline-flex items-center text-xs align-middle"
+                >
+                  <span
+                    class="size-7 flex justify-center items-center shrink-0 bg-gray-100 font-medium text-gray-800 rounded-full group-focus:bg-gray-200 hs-stepper-active:bg-emerald-400 hs-stepper-active:text-white hs-stepper-success:bg-emerald-400 hs-stepper-success:text-white hs-stepper-completed:bg-teal-500 hs-stepper-completed:group-focus:bg-teal-600 dark:bg-neutral-700 dark:text-white dark:group-focus:bg-gray-600 dark:hs-stepper-active:bg-emerald-300 dark:hs-stepper-success:bg-emerald-300 dark:hs-stepper-completed:bg-teal-500 dark:hs-stepper-completed:group-focus:bg-teal-600"
+                  >
+                    <span
+                      class="hs-stepper-success:hidden hs-stepper-completed:hidden"
+                      >2</span
+                    >
+                    <svg
+                      class="hidden shrink-0 size-3 hs-stepper-success:block"
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="24"
+                      height="24"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="3"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                    >
+                      <polyline points="20 6 9 17 4 12"></polyline>
+                    </svg>
+                  </span>
+                  <span
+                    class="ms-2 text-sm font-medium text-gray-800 dark:text-neutral-200"
+                  >
+                    O meni
+                  </span>
+                </span>
+                <div
+                  class="w-full h-px flex-1 bg-gray-200 group-last:hidden hs-stepper-success:bg-emerald-400 hs-stepper-completed:bg-teal-600 dark:bg-neutral-700 dark:hs-stepper-success:bg-emerald-400 dark:hs-stepper-completed:bg-teal-600"
+                ></div>
+              </li>
+
+              <li
+                class="flex items-center gap-x-2 shrink basis-0 flex-1 group"
+                data-hs-stepper-nav-item='{
+                  "index": 3
+                }'
+              >
+                <span
+                  class="min-w-7 min-h-7 group inline-flex items-center text-xs align-middle"
+                >
+                  <span
+                    class="size-7 flex justify-center items-center shrink-0 bg-gray-100 font-medium text-gray-800 rounded-full group-focus:bg-gray-200 hs-stepper-active:bg-emerald-400 hs-stepper-active:text-white hs-stepper-success:bg-emerald-400 hs-stepper-success:text-white hs-stepper-completed:bg-teal-500 hs-stepper-completed:group-focus:bg-teal-600 dark:bg-neutral-700 dark:text-white dark:group-focus:bg-gray-600 dark:hs-stepper-active:bg-emerald-300 dark:hs-stepper-success:bg-emerald-300 dark:hs-stepper-completed:bg-teal-500 dark:hs-stepper-completed:group-focus:bg-teal-600"
+                  >
+                    <span
+                      class="hs-stepper-success:hidden hs-stepper-completed:hidden"
+                      >3</span
+                    >
+                    <svg
+                      class="hidden shrink-0 size-3 hs-stepper-success:block"
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="24"
+                      height="24"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="3"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                    >
+                      <polyline points="20 6 9 17 4 12"></polyline>
+                    </svg>
+                  </span>
+                  <span
+                    class="ms-2 text-sm font-medium text-gray-800 dark:text-neutral-200"
+                  >
+                    Završno
+                  </span>
+                </span>
+                <div
+                  class="w-full h-px flex-1 bg-gray-200 group-last:hidden hs-stepper-success:bg-emerald-400 hs-stepper-completed:bg-teal-600 dark:bg-neutral-700 dark:hs-stepper-success:bg-emerald-400 dark:hs-stepper-completed:bg-teal-600"
+                ></div>
+              </li>
+              <!-- End Item -->
+            </ul>
+            <!-- End Stepper Nav -->
+
+            <!-- Stepper Content -->
+            <div class="mt-5 sm:mt-8">
+              <!-- First Content -->
+              <div
+                data-hs-stepper-content-item='{
+                  "index": 1
+                }'
+              >
+                <div
+                  class="p-4 h-48 bg-white rounded-xl shadow sm:p-7 flex flex-col justify-center items-center dark:border dark:bg-neutral-800 dark:border-neutral-700"
+                >
+                  <div class="max-w-sm">
+                    <label
+                      for="input-label"
+                      class="block text-sm mb-2 text-gray-500 dark:text-white"
+                      >Ime i prezime</label
+                    >
+                    <input
+                      type="text"
+                      id="input-label"
+                      class="py-3 px-4 block w-full border-gray-200 rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-900 dark:border-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600"
+                      placeholder="Vaše ime i prezime"
+                    />
+                  </div>
+                  <div class="grid sm:grid-cols-3 gap-2">
+                    <label
+                      for="male"
+                      class="flex p-3 w-full bg-white border border-gray-200 rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 dark:bg-neutral-900 dark:border-neutral-700 dark:text-neutral-400"
+                    >
+                      <input
+                        type="radio"
+                        name="gender"
+                        class="shrink-0 mt-0.5 border-gray-200 rounded-full text-blue-600 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-800 dark:border-neutral-700 dark:checked:bg-blue-500 dark:checked:border-blue-500 dark:focus:ring-offset-gray-800"
+                        id="male"
+                        value="male"
+                      />
+                      <span
+                        class="text-sm text-gray-500 ms-3 dark:text-neutral-400"
+                        >Muško</span
+                      >
+                    </label>
+
+                    <label
+                      for="female"
+                      class="flex p-3 w-full bg-white border border-gray-200 rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 dark:bg-neutral-900 dark:border-neutral-700 dark:text-neutral-400"
+                    >
+                      <input
+                        type="radio"
+                        name="gender"
+                        class="shrink-0 mt-0.5 border-gray-200 rounded-full text-blue-600 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-800 dark:border-neutral-700 dark:checked:bg-blue-500 dark:checked:border-blue-500 dark:focus:ring-offset-gray-800"
+                        id="female"
+                        value="female"
+                      />
+                      <span
+                        class="text-sm text-gray-500 ms-3 dark:text-neutral-400"
+                      >
+                        Žensko</span
+                      >
+                    </label>
+
+                    <label
+                      for="other"
+                      class="flex p-3 w-full bg-white border border-gray-200 rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 dark:bg-neutral-900 dark:border-neutral-700 dark:text-neutral-400"
+                    >
+                      <input
+                        type="radio"
+                        name="gender"
+                        class="shrink-0 mt-0.5 border-gray-200 rounded-full text-blue-600 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-800 dark:border-neutral-700 dark:checked:bg-blue-500 dark:checked:border-blue-500 dark:focus:ring-offset-gray-800"
+                        id="other"
+                        value="other"
+                      />
+                      <span
+                        class="text-sm text-gray-500 ms-3 dark:text-neutral-400"
+                        >Ostalo</span
+                      >
+                    </label>
+                  </div>
+                  <div
+                    class="grid sm:grid-cols-12 gap-2 sm:gap-4 py-8 first:pt-0 last:pb-0 border-t first:border-transparent border-gray-200 dark:border-neutral-700 dark:first:border-transparent"
+                  ></div>
+                </div>
+              </div>
+              <!-- End First Content -->
+
+              <!-- First Content -->
+              <div
+                data-hs-stepper-content-item='{
+                  "index": 2
+                }'
+                style="display: none"
+              >
+                <div
+                  class="p-4 h-48 bg-white rounded-xl shadow sm:p-7 flex flex-col justify-center items-center dark:border dark:bg-neutral-800 dark:border-neutral-700"
+                >
+                  <h3 class="text-gray-500 dark:text-neutral-500">
+                    Second content
+                  </h3>
+                </div>
+              </div>
+              <!-- End First Content -->
+
+              <!-- First Content -->
+              <div
+                data-hs-stepper-content-item='{
+                  "index": 3
+                }'
+                style="display: none"
+              >
+                <div
+                  class="p-4 h-48 bg-white rounded-xl shadow sm:p-7 flex flex-col justify-center items-center dark:border dark:bg-neutral-800 dark:border-neutral-700"
+                >
+                  <h3 class="text-gray-500 dark:text-neutral-500">
+                    <!-- Form Group -->
+                    <div class="max-w-sm">
+                      <label class="block text-sm mb-2 dark:text-white"
+                        >Lozinka</label
+                      >
+                      <div class="relative">
+                        <input
+                          id="hs-toggle-password"
+                          type="password"
+                          class="py-3 ps-4 pe-10 block w-full border-gray-200 rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-900 dark:border-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600"
+                          placeholder="Unesite lozinku"
+                        />
+                        <button
+                          type="button"
+                          data-hs-toggle-password='{
+                            "target": "#hs-toggle-password"
+                          }'
+                          class="absolute inset-y-0 end-0 flex items-center z-20 px-3 cursor-pointer text-gray-400 rounded-e-md focus:outline-none focus:text-blue-600 dark:text-neutral-600 dark:focus:text-blue-500"
+                        >
+                          <svg
+                            class="shrink-0 size-3.5"
+                            width="24"
+                            height="24"
+                            viewBox="0 0 24 24"
+                            fill="none"
+                            stroke="currentColor"
+                            stroke-width="2"
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                          >
+                            <path
+                              class="hs-password-active:hidden"
+                              d="M9.88 9.88a3 3 0 1 0 4.24 4.24"
+                            ></path>
+                            <path
+                              class="hs-password-active:hidden"
+                              d="M10.73 5.08A10.43 10.43 0 0 1 12 5c7 0 10 7 10 7a13.16 13.16 0 0 1-1.67 2.68"
+                            ></path>
+                            <path
+                              class="hs-password-active:hidden"
+                              d="M6.61 6.61A13.526 13.526 0 0 0 2 12s3 7 10 7a9.74 9.74 0 0 0 5.39-1.61"
+                            ></path>
+                            <line
+                              class="hs-password-active:hidden"
+                              x1="2"
+                              x2="22"
+                              y1="2"
+                              y2="22"
+                            ></line>
+                            <path
+                              class="hidden hs-password-active:block"
+                              d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7Z"
+                            ></path>
+                            <circle
+                              class="hidden hs-password-active:block"
+                              cx="12"
+                              cy="12"
+                              r="3"
+                            ></circle>
+                          </svg>
+                        </button>
+                      </div>
+                    </div>
+                    <!-- End Form Group -->
+                  </h3>
+                </div>
+              </div>
+              <!-- End First Content -->
+
+              <!-- Final Content -->
+              <div
+                data-hs-stepper-content-item='{
+                  "isFinal": true
+                }'
+                style="display: none"
+              >
+                <div
+                  class="p-4 h-48 bg-gray-50 flex justify-center items-center border border-dashed border-gray-200 rounded-xl dark:bg-neutral-800 dark:border-neutral-700"
+                >
+                  <h3 class="text-gray-500 dark:text-neutral-500">
+                    Final content
+                  </h3>
+                </div>
+              </div>
+              <!-- End Final Content -->
+
+              <!-- Button Group -->
+              <div class="mt-5 flex justify-between items-center gap-x-2">
+                <button
+                  type="button"
+                  class="py-2 px-3 inline-flex items-center gap-x-1 text-sm font-medium rounded-lg border border-gray-200 bg-white text-gray-800 shadow-sm hover:bg-gray-50 focus:outline-none focus:bg-gray-50 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-800 dark:border-neutral-700 dark:text-neutral-300 dark:hover:bg-neutral-700 dark:focus:bg-neutral-700"
+                  data-hs-stepper-back-btn=""
+                >
+                  <svg
+                    class="shrink-0 size-4"
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="24"
+                    height="24"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  >
+                    <path d="m15 18-6-6 6-6"></path>
+                  </svg>
+                  Natrag
+                </button>
+                <button
+                  type="button"
+                  class="py-2 px-3 inline-flex items-center gap-x-1 text-sm font-medium rounded-lg border border-transparent bg-emerald-400 text-white hover:bg-emerald-500 focus:outline-none focus:bg-emerald-500 disabled:opacity-50 disabled:pointer-events-none"
+                  data-hs-stepper-next-btn=""
+                >
+                  Dalje
+                  <svg
+                    class="shrink-0 size-4"
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="24"
+                    height="24"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  >
+                    <path d="m9 18 6-6-6-6"></path>
+                  </svg>
+                </button>
+                <button
+                  type="button"
+                  class="py-2 px-3 inline-flex items-center gap-x-1 text-sm font-medium rounded-lg border border-transparent bg-emerald-400 text-white hover:bg-emerald-500 focus:outline-none focus:bg-emerald-500 disabled:opacity-50 disabled:pointer-events-none"
+                  data-hs-stepper-finish-btn=""
+                  style="display: none"
+                >
+                  Završi
+                </button>
+                <button
+                  type="reset"
+                  class="py-2 px-3 inline-flex items-center gap-x-1 text-sm font-medium rounded-lg border border-transparent bg-emerald-400 text-white hover:bg-emerald-500 focus:outline-none focus:bg-emerald-500 disabled:opacity-50 disabled:pointer-events-none"
+                  data-hs-stepper-reset-btn=""
+                  style="display: none"
+                >
+                  Reset
+                </button>
+              </div>
+              <!-- End Button Group -->
+            </div>
+            <!-- End Stepper Content -->
+          </div>
+          <!-- End Stepper -->
+        </div>
+        <!-- End Card Section -->
+      </div>
+    </main>
   </body>
 </html>
