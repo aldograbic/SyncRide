@@ -50,6 +50,8 @@ public class RegistrationController {
                             @RequestParam("fullName") String fullName,
                             @RequestParam("password") String password,
                             @RequestParam("gender") String gender,
+                            @RequestParam("address") String address,
+                            @RequestParam("city_id") int cityId,
                             @RequestParam(value = "phone", required = false) String phone,
                             @RequestParam(value = "bio", required = false) String bio,
                             @RequestParam(value = "profilePicture", required = false) MultipartFile profilePicture,
@@ -62,6 +64,9 @@ public class RegistrationController {
             String encyptedPassword = passwordEncoder.encode(password);
             user.setPassword(encyptedPassword);
             user.setFullName(fullName);
+            user.setGender(gender);
+            user.setAddress(address);
+            user.setCityId(cityId);
             user.setConfirmationToken(null);
             
             String profilePictureUrl = null;
@@ -74,6 +79,7 @@ public class RegistrationController {
                 }
             }
 
+            user.setPhone(phone);
             user.setBio(bio);
             user.setProfilePicture(profilePictureUrl);
             userRepository.saveFull(user);

@@ -2,7 +2,7 @@
 <html lang="en">
   <head>
     <th:block
-      th:insert="~{fragments/head :: head(title='SyncRide')}"
+      th:insert="~{fragments/head :: head(title='Prijava | SyncRide')}"
     ></th:block>
   </head>
   <body>
@@ -30,6 +30,8 @@
                 name="email"
                 class="peer p-4 block w-full border-gray-200 rounded-lg text-sm placeholder:text-transparent focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-900 dark:border-neutral-700 dark:text-neutral-200 dark:focus:ring-neutral-600 focus:pt-6 focus:pb-2 [&:not(:placeholder-shown)]:pt-6 [&:not(:placeholder-shown)]:pb-2 autofill:pt-6 autofill:pb-2"
                 placeholder="you@email.com"
+                required
+                autocomplete="email"
               />
               <label
                 for="hs-floating-input-email"
@@ -82,11 +84,15 @@
           </button>
           <p class="text-sm">
             Registracijom prihvaćate naše
-            <a href="" class="text-emerald-400 font-semibold hover:underline"
+            <a
+              href="/terms-and-conditions"
+              class="text-emerald-400 font-semibold hover:underline"
               >uvjete korištenja</a
             >
             i
-            <a href="" class="text-emerald-400 font-semibold hover:underline"
+            <a
+              href="/privacy-policy"
+              class="text-emerald-400 font-semibold hover:underline"
               >politiku privatnosti</a
             >
           </p>
