@@ -1,6 +1,7 @@
 package com.project.SyncRide.controllers;
 
 import java.io.IOException;
+import java.util.List;
 import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,7 +14,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.project.SyncRide.models.city.City;
 import com.project.SyncRide.models.user.User;
+import com.project.SyncRide.repositories.city.CityRepository;
 import com.project.SyncRide.repositories.user.UserRepository;
 import com.project.SyncRide.services.EmailService;
 import com.project.SyncRide.services.FileUploadService;
@@ -23,6 +26,9 @@ public class RegistrationController {
 
     @Autowired
     private UserRepository userRepository;
+
+    @Autowired
+    private CityRepository cityRepository;
 
     @Autowired
     private EmailService emailService;
@@ -35,6 +41,10 @@ public class RegistrationController {
 
     @GetMapping("/setup")
     public String showSetupPage(@RequestParam("token") String token, Model model) {
+
+        List<City> cities = cityRepository.getAllCities();
+        model.addAttribute("cities", cities);
+
         User user = userRepository.findByConfirmationToken(token);
         if (user != null && user.isEmailVerified()) {
             model.addAttribute("token", token);

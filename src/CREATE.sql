@@ -14,6 +14,7 @@ CREATE TABLE users (
     email VARCHAR(100) NOT NULL UNIQUE,
     password VARCHAR(255) NOT NULL DEFAULT NULL,
     city_id INT DEFAULT NULL,
+    post_code INT(5) DEFAULT NULL,
     role ENUM('ROLE_USER', 'ROLE_ADMIN') DEFAULT 'ROLE_USER',
     email_verified boolean DEFAULT false,
 	confirmation_token varchar(255) DEFAULT NULL,

@@ -15,6 +15,7 @@ public class User {
     private String email;
     private String password;
     private int cityId;
+    private int postCode;
     private String role;
     private boolean emailVerified;
     private String confirmationToken;
@@ -100,6 +101,14 @@ public class User {
 
     public void setCityId(int cityId) {
         this.cityId = cityId;
+    }
+
+    public int getPostCode() {
+        return postCode;
+    }
+
+    public void setPostCode(int postCode) {
+        this.postCode = postCode;
     }
 
     public String getRole() {

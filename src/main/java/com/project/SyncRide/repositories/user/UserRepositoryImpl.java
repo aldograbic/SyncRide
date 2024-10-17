@@ -17,7 +17,7 @@ public class UserRepositoryImpl implements UserRepository{
 
     @Override
     public User findByEmail(String email) {
-        String sql = "SELECT user_id, email, full_name, password, gender, address, phone, bio, profile_picture, role, city_id, created_at, confirmation_token, email_verified FROM users WHERE email = ?";
+        String sql = "SELECT user_id, email, full_name, password, gender, address, phone, bio, profile_picture, role, city_id, post_code, created_at, confirmation_token, email_verified FROM users WHERE email = ?";
         List<User> users = jdbcTemplate.query(sql, new UserRowMapper(), email);
         return users.isEmpty() ? null : users.get(0);
     }
@@ -31,7 +31,7 @@ public class UserRepositoryImpl implements UserRepository{
 
     @Override
     public User findByConfirmationToken(String token) {
-        String sql = "SELECT user_id, email, full_name, password, gender, address, phone, bio, profile_picture, role, city_id, created_at, confirmation_token, email_verified FROM users WHERE confirmation_token = ?";
+        String sql = "SELECT user_id, email, full_name, password, gender, address, phone, bio, profile_picture, role, city_id, post_code, created_at, confirmation_token, email_verified FROM users WHERE confirmation_token = ?";
         List<User> users = jdbcTemplate.query(sql, new UserRowMapper(), token);
         return users.isEmpty() ? null : users.get(0);
     }
@@ -44,8 +44,8 @@ public class UserRepositoryImpl implements UserRepository{
 
     @Override
     public void update(User user) {
-        String sql = "UPDATE users SET full_name = ?, password = ?, phone = ?, gender = ?, address = ?, city_id = ?, bio = ?, profile_picture = ?";
-        jdbcTemplate.update(sql, user.getFullName(), user.getPassword(), user.getPhone(), user.getGender(), user.getAddress(), user.getCityId(), user.getBio(), user.getProfilePicture());
+        String sql = "UPDATE users SET full_name = ?, password = ?, phone = ?, gender = ?, address = ?, city_id = ?, post_code = ?, bio = ?, profile_picture = ?";
+        jdbcTemplate.update(sql, user.getFullName(), user.getPassword(), user.getPhone(), user.getGender(), user.getAddress(), user.getCityId(), user.getPostCode(), user.getBio(), user.getProfilePicture());
     }
 
     @Override
@@ -56,13 +56,13 @@ public class UserRepositoryImpl implements UserRepository{
 
     @Override
     public void saveFull(User user) {
-        String sql = "UPDATE users SET full_name = ?, password = ?, gender = ?, phone = ?, address = ?, city_id = ?, bio = ?, profile_picture = ? WHERE user_id = ?";
-        jdbcTemplate.update(sql, user.getFullName(), user.getPassword(), user.getGender(), user.getPhone(), user.getAddress(), user.getCityId(), user.getBio(), user.getProfilePicture(), user.getUserId());
+        String sql = "UPDATE users SET full_name = ?, password = ?, gender = ?, phone = ?, address = ?, city_id = ?, post_code = ?, bio = ?, profile_picture = ? WHERE user_id = ?";
+        jdbcTemplate.update(sql, user.getFullName(), user.getPassword(), user.getGender(), user.getPhone(), user.getAddress(), user.getCityId(), user.getPostCode(), user.getBio(), user.getProfilePicture(), user.getUserId());
     }
 
     @Override
     public User findById(Long userId) {
-        String sql = "SELECT user_id, email, full_name, password, gender, address, phone, bio, profile_picture, role, city_id, created_at, confirmation_token, email_verified FROM users WHERE user_id = ?";
+        String sql = "SELECT user_id, email, full_name, password, gender, address, phone, bio, profile_picture, role, city_id, post_code, created_at, confirmation_token, email_verified FROM users WHERE user_id = ?";
         List<User> users = jdbcTemplate.query(sql, new UserRowMapper(), userId);
         return users.isEmpty() ? null : users.get(0);
     }
