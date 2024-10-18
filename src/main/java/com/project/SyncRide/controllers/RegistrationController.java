@@ -61,8 +61,9 @@ public class RegistrationController {
                             @RequestParam("password") String password,
                             @RequestParam("gender") String gender,
                             @RequestParam("address") String address,
-                            @RequestParam("city_id") int cityId,
-                            @RequestParam(value = "phone", required = false) String phone,
+                            @RequestParam("cityId") int cityId,
+                            @RequestParam("postCode") int postCode,
+                            @RequestParam("phone") String phone,
                             @RequestParam(value = "bio", required = false) String bio,
                             @RequestParam(value = "profilePicture", required = false) MultipartFile profilePicture,
                             RedirectAttributes redirectAttributes,
@@ -77,6 +78,7 @@ public class RegistrationController {
             user.setGender(gender);
             user.setAddress(address);
             user.setCityId(cityId);
+            user.setPostCode(postCode);
             user.setConfirmationToken(null);
             
             String profilePictureUrl = null;
@@ -118,7 +120,7 @@ public class RegistrationController {
             userRepository.save(user);
 
             String confirmationLink = "http://localhost:8080/confirm?token=" + confirmationToken;
-            emailService.sendConfirmationEmail(email, confirmationLink);
+            // emailService.sendConfirmationEmail(email, confirmationLink);
             model.addAttribute("success", "Registracija uspješna! Provjerite svoju e-poštu za potvrdu.");
         }
         return "login";
