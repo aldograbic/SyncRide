@@ -33,7 +33,7 @@ public class SecurityConfig {
                 .disable()))
             .authorizeHttpRequests((auth) -> auth
                 .requestMatchers("/css/**", "/img/**", "/js/**").permitAll()
-                .requestMatchers("/", "/login", "/register", "/confirm", "/setup", "/privacy-policy", "/terms-and-conditions", "/api/rides/nearby").permitAll()
+                .requestMatchers("/", "/login", "/register", "/confirm", "/setup", "/privacy-policy", "/terms-and-conditions", "/api/rides/nearby", "/account/**").permitAll()
                 // .requestMatchers("/user-dashboard").hasRole("USER")
                 // .requestMatchers("/admin-dashboard").hasRole("ADMIN")
                 .requestMatchers("/courses/add", "/courses/{courseId}/changeAccessCode", "/courses/{courseId}/addResources", "/assigments/add").hasAnyRole("ADMIN", "INSTRUCTOR")

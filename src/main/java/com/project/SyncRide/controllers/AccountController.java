@@ -43,6 +43,11 @@ public class AccountController {
         return "account";
     }
 
+    @GetMapping("/personal-info")
+    public String getPersonalInfoPage() {
+        return "personal-info";
+    }
+
     @PostMapping("/update")
     public String updateAccount(@RequestParam("fullName") String fullName,
                                 @RequestParam(value = "password", required = false) String password,
