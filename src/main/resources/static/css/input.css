@@ -1,3 +1,17 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer components {
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+  }
+
+  h1 {
+    @apply dark:text-neutral-100;
+  }
+
+  button {
+    @apply transition-colors;
+  }
+}

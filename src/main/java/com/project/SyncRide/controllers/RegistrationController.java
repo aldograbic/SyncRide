@@ -105,11 +105,11 @@ public class RegistrationController {
     }
 
     @PostMapping("/register")
-    public String registerUser(@RequestParam("email") String email, Model model) {
+    public String registerUser(@RequestParam("email") String email, RedirectAttributes redirectAttributes) {
         
         if (userRepository.existsByEmail(email)) {
-            model.addAttribute("info", "Račun s ovom e-mail adresom je već registriran.");
-            return "login";
+            redirectAttributes.addFlashAttribute("info", "Račun s ovom e-mail adresom je već registriran.");
+            return "redirect:/login";
 
         } else {
             String confirmationToken = UUID.randomUUID().toString();
@@ -121,23 +121,23 @@ public class RegistrationController {
 
             String confirmationLink = "http://localhost:8080/confirm?token=" + confirmationToken;
             emailService.sendConfirmationEmail(email, confirmationLink);
-            model.addAttribute("success", "Registracija uspješna! Provjerite svoju e-poštu za potvrdu.");
+            redirectAttributes.addFlashAttribute("success", "Registracija uspješna! Provjerite svoju e-poštu za potvrdu.");
         }
-        return "login";
+        return "redirect:/login";
     }
 
     @GetMapping("/confirm")
-    public String confirmUser(@RequestParam("token") String token, Model model) {
+    public String confirmUser(@RequestParam("token") String token, RedirectAttributes redirectAttributes) {
         User user = userRepository.findByConfirmationToken(token);
-
+    
         if (user != null) {
             user.setEmailVerified(true);
             userRepository.updateVerification(user);
-            model.addAttribute("success", "Vaš račun je uspješno potvrđen!");
-            return "setup";
+            redirectAttributes.addFlashAttribute("success", "Vaš račun je uspješno potvrđen!");
+            return "redirect:/setup?token=" + token;
         } else {
-            model.addAttribute("error", "Nevažeći link za potvrdu, molimo kontaktirajte podršku.");
-            return "login";
+            redirectAttributes.addFlashAttribute("error", "Nevažeći link za potvrdu, molimo kontaktirajte podršku.");
+            return "redirect:/login";
         }
     }
 }

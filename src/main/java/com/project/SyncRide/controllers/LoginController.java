@@ -15,7 +15,7 @@ public class LoginController {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         if (authentication != null && authentication.isAuthenticated() && !authentication.getPrincipal().equals("anonymousUser")) {
             redirectAttributes.addFlashAttribute("info", "Već ste prijavljeni u platformu!");
-            return "redirect:/dashboard";
+            return "redirect:/";
         }
 
         return "login";
