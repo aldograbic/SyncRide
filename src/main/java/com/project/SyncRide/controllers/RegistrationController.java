@@ -21,6 +21,9 @@ import com.project.SyncRide.repositories.user.UserRepository;
 import com.project.SyncRide.services.EmailService;
 import com.project.SyncRide.services.FileUploadService;
 
+import jakarta.mail.MessagingException;
+import jakarta.servlet.http.HttpSession;
+
 @Controller
 public class RegistrationController {
 
@@ -42,10 +45,11 @@ public class RegistrationController {
     @GetMapping("/setup")
     public String showSetupPage(@RequestParam("token") String token, Model model) {
 
+        User user = userRepository.findByConfirmationToken(token);
+
         List<City> cities = cityRepository.getAllCities();
         model.addAttribute("cities", cities);
 
-        User user = userRepository.findByConfirmationToken(token);
         if (user != null && user.isEmailVerified()) {
             model.addAttribute("token", token);
             return "setup";
@@ -119,21 +123,27 @@ public class RegistrationController {
             user.setConfirmationToken(confirmationToken);
             userRepository.save(user);
 
-            String confirmationLink = "http://localhost:8080/confirm?token=" + confirmationToken;
-            emailService.sendConfirmationEmail(email, confirmationLink);
+            // String confirmationLink = "http://localhost:8080/confirm?token=" + confirmationToken;
+            try {
+                emailService.sendConfirmationEmail(email, confirmationToken);
+            } catch (MessagingException e) {
+                
+                e.printStackTrace();
+            }
             redirectAttributes.addFlashAttribute("success", "Registracija uspješna! Provjerite svoju e-poštu za potvrdu.");
         }
         return "redirect:/login";
     }
 
-    @GetMapping("/confirm")
-    public String confirmUser(@RequestParam("token") String token, RedirectAttributes redirectAttributes) {
+    @PostMapping("/confirm")
+    public String confirmUserPost(@RequestParam("token") String token, Model model, RedirectAttributes redirectAttributes) {
         User user = userRepository.findByConfirmationToken(token);
-    
+
         if (user != null) {
             user.setEmailVerified(true);
             userRepository.updateVerification(user);
             redirectAttributes.addFlashAttribute("success", "Vaš račun je uspješno potvrđen!");
+
             return "redirect:/setup?token=" + token;
         } else {
             redirectAttributes.addFlashAttribute("error", "Nevažeći link za potvrdu, molimo kontaktirajte podršku.");
