@@ -24,6 +24,6 @@ public class DatabaseLoginSuccessHandler extends SavedRequestAwareAuthentication
     
     @Override
     public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response, Authentication authentication) throws ServletException, IOException {
-        response.sendRedirect("/home?success");
+        response.sendRedirect("/?success");
     }
 }

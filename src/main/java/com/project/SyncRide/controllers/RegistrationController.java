@@ -120,7 +120,7 @@ public class RegistrationController {
             userRepository.save(user);
 
             String confirmationLink = "http://localhost:8080/confirm?token=" + confirmationToken;
-            // emailService.sendConfirmationEmail(email, confirmationLink);
+            emailService.sendConfirmationEmail(email, confirmationLink);
             model.addAttribute("success", "Registracija uspješna! Provjerite svoju e-poštu za potvrdu.");
         }
         return "login";
