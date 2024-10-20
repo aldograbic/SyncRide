@@ -5,19 +5,163 @@
       th:insert="~{fragments/head :: head(title='Objavi vožnju | SyncRide')}"
     ></th:block>
   </head>
-  <body>
+  <body
+    class="m-0 h-screen flex flex-col"
+    x-data="{ showStepper: false, activeStep: 1 }"
+  >
     <th:block th:insert="~{fragments/header :: header}"></th:block>
-    <main>
-      <div class="flex flex-col items-center space-y-2">
+
+    <!-- Main Content -->
+    <div
+      class="flex items-center justify-center flex-grow"
+      x-show="!showStepper"
+    >
+      <div class="flex flex-col space-y-2 mb-16">
         <h1 class="text-4xl font-extrabold">Objavite svoju vožnju</h1>
-        <h2 class="pb-4">Povežite se s putnicima koji traže vožnju!</h2>
+        <h2 class="pb-4 text-gray-600 text-center text-sm">
+          Povežite se s putnicima koji traže vožnju
+        </h2>
         <button
           type="button"
           class="py-2 px-3 inline-flex justify-center items-center gap-x-2 font-medium rounded-lg border border-transparent bg-emerald-400 text-white hover:bg-emerald-500 focus:outline-none focus:bg-emerald-500 disabled:opacity-50 disabled:pointer-events-none"
+          @click="setTimeout(() => { showStepper = true; }, 200)"
         >
-          Počni
+          Započni
         </button>
       </div>
-    </main>
+    </div>
+
+    <!-- Stepper -->
+    <div
+      data-hs-stepper=""
+      x-show="showStepper"
+      style="display: none"
+      x-transition
+      class="px-52 py-4 mt-16"
+    >
+      <!-- Stepper Nav -->
+      <ul class="relative flex flex-row gap-x-2">
+        <li data-hs-stepper-nav-item='{"index": 1}'>
+          <h1
+            class="text-3xl font-semibold justify-center items-center text-left"
+            x-show="activeStep === 1"
+          >
+            Odaberite automobil
+          </h1>
+        </li>
+
+        <li data-hs-stepper-nav-item='{"index": 2}'>
+          <h1
+            class="text-3xl font-semibold justify-center items-center text-left"
+            x-show="activeStep === 2"
+          >
+            Informacije o vožnji
+          </h1>
+        </li>
+
+        <li data-hs-stepper-nav-item='{"index": 3}'>
+          <h1
+            class="text-3xl font-semibold justify-center items-center text-left"
+            x-show="activeStep === 3"
+          >
+            Provjerite i potvrdite
+          </h1>
+        </li>
+      </ul>
+      <!-- End Stepper Nav -->
+
+      <!-- Stepper Content -->
+      <div class="mt-5 sm:mt-8">
+        <div
+          data-hs-stepper-content-item='{"index": 1}'
+          x-show="activeStep === 1"
+        >
+          <div
+            class="p-4 h-48 bg-gray-50 flex justify-center items-center border border-dashed border-gray-200 rounded-xl dark:bg-neutral-800 dark:border-neutral-700"
+          >
+            <h3 class="text-gray-500 dark:text-neutral-500">First content</h3>
+          </div>
+        </div>
+
+        <div
+          data-hs-stepper-content-item='{"index": 2}'
+          x-show="activeStep === 2"
+        >
+          <div
+            class="p-4 h-48 bg-gray-50 flex justify-center items-center border border-dashed border-gray-200 rounded-xl dark:bg-neutral-800 dark:border-neutral-700"
+          >
+            <h3 class="text-gray-500 dark:text-neutral-500">Second content</h3>
+          </div>
+        </div>
+
+        <div
+          data-hs-stepper-content-item='{"index": 3}'
+          x-show="activeStep === 3"
+        >
+          <div
+            class="p-4 h-48 bg-gray-50 flex justify-center items-center border border-dashed border-gray-200 rounded-xl dark:bg-neutral-800 dark:border-neutral-700"
+          >
+            <h3 class="text-gray-500 dark:text-neutral-500">Third content</h3>
+          </div>
+        </div>
+
+        <!-- Button Group -->
+        <div class="mt-5 flex justify-between items-center gap-x-2">
+          <button
+            type="button"
+            class="py-2 px-3 inline-flex items-center gap-x-1 text-sm font-medium rounded-lg border border-gray-200 bg-white text-gray-800 shadow-sm hover:bg-gray-50 focus:outline-none focus:bg-gray-50 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-800 dark:border-neutral-700 dark:text-neutral-300 dark:hover:bg-neutral-700 dark:focus:bg-neutral-700"
+            :disabled="activeStep === 1"
+            @click="activeStep = Math.max(1, activeStep - 1)"
+          >
+            <svg
+              class="shrink-0 size-4"
+              xmlns="http://www.w3.org/2000/svg"
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <path d="m15 18-6-6 6-6"></path>
+            </svg>
+            Natrag
+          </button>
+
+          <button
+            type="button"
+            class="py-2 px-3 inline-flex items-center gap-x-1 text-sm font-medium rounded-lg border border-transparent bg-emerald-400 text-white hover:bg-emerald-500 focus:outline-none focus:bg-emerald-500 disabled:opacity-50 disabled:pointer-events-none"
+            x-show="activeStep < 3"
+            @click="activeStep = Math.min(3, activeStep + 1)"
+          >
+            Dalje
+            <svg
+              class="shrink-0 size-4"
+              xmlns="http://www.w3.org/2000/svg"
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <path d="m9 18 6-6-6-6"></path>
+            </svg>
+          </button>
+
+          <button
+            type="button"
+            class="py-2 px-3 inline-flex items-center gap-x-1 text-sm font-medium rounded-lg border border-transparent bg-emerald-400 text-white hover:bg-emerald-500 focus:outline-none focus:bg-emerald-500 disabled:opacity-50 disabled:pointer-events-none"
+            x-show="activeStep === 3"
+          >
+            Objavi
+          </button>
+        </div>
+      </div>
+    </div>
   </body>
 </html>
