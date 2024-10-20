@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <th:block
+      th:insert="~{fragments/head :: head(title='Objavi vožnju | SyncRide')}"
+    ></th:block>
+  </head>
+  <body>
+    <th:block th:insert="~{fragments/header :: header}"></th:block>
+    <main>
+      <div class="flex flex-col items-center space-y-2">
+        <h1 class="text-4xl font-extrabold">Objavite svoju vožnju</h1>
+        <h2 class="pb-4">Povežite se s putnicima koji traže vožnju!</h2>
+        <button
+          type="button"
+          class="py-2 px-3 inline-flex justify-center items-center gap-x-2 font-medium rounded-lg border border-transparent bg-emerald-400 text-white hover:bg-emerald-500 focus:outline-none focus:bg-emerald-500 disabled:opacity-50 disabled:pointer-events-none"
+        >
+          Počni
+        </button>
+      </div>
+    </main>
+  </body>
+</html>

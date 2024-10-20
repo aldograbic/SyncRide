@@ -41,9 +41,14 @@ CREATE TABLE rides (
     start_location VARCHAR(255) NOT NULL,
     end_location VARCHAR(255) NOT NULL,
     departure_time DATETIME NOT NULL,
+    start_latitude DECIMAL(10, 8),
+    start_longitude DECIMAL(11, 8),
+    end_latitude DECIMAL(10, 8),
+    end_longitude DECIMAL(11, 8),
     available_seats INT NOT NULL,
     price_per_person DECIMAL(10, 2),
     additional_info TEXT,
+    status ENUM('active', 'completed', 'cancelled') DEFAULT 'active',
     FOREIGN KEY (driver_id) REFERENCES users(user_id) ON DELETE CASCADE,
     FOREIGN KEY (car_id) REFERENCES user_cars(car_id)
 );
@@ -98,4 +103,14 @@ CREATE TABLE saved_rides (
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     FOREIGN KEY (user_id) REFERENCES users(user_id) ON DELETE CASCADE,
     FOREIGN KEY (ride_id) REFERENCES rides(ride_id) ON DELETE CASCADE
+);
+
+CREATE TABLE payments (
+    payment_id INT AUTO_INCREMENT PRIMARY KEY,
+    booking_id INT NOT NULL,
+    amount DECIMAL(10, 2) NOT NULL,
+    payment_status ENUM('pending', 'completed', 'failed') DEFAULT 'pending',
+    payment_method VARCHAR(50),
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (booking_id) REFERENCES bookings(booking_id) ON DELETE CASCADE
 );
