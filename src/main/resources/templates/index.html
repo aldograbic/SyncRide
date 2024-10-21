@@ -8,6 +8,9 @@
   <body class="min-h-[120vh]">
     <th:block th:insert="~{fragments/header :: header}"></th:block>
     <main>
+      <th:block
+        th:insert="~{fragments/successMessage :: successMessage}"
+      ></th:block>
       <div x-data="{ rides: [], userLocation: null }" class="grid grid-cols-2">
         <div></div>
         <div id="map" class="min-h-screen z-0"></div>

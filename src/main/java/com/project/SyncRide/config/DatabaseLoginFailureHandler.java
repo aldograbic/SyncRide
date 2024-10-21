@@ -17,15 +17,19 @@ public class DatabaseLoginFailureHandler extends SimpleUrlAuthenticationFailureH
 
     @Override
     public void onAuthenticationFailure(HttpServletRequest request,
-                                    HttpServletResponse response,
-                                    AuthenticationException exception) throws IOException, ServletException {
+                                        HttpServletResponse response,
+                                        AuthenticationException exception) throws IOException, ServletException {
+
+        String referrerUrl = request.getHeader("Referer");
+        String fallbackUrl = "/login?error";
+        String redirectUrl = referrerUrl != null ? referrerUrl + "?error" : fallbackUrl;
 
         if (exception instanceof BadCredentialsException) {
-            response.sendRedirect("/login?error");
+            response.sendRedirect(redirectUrl);
         } else if (exception instanceof EmailNotVerifiedException) {
-            response.sendRedirect("/login?notVerified");
+            response.sendRedirect(referrerUrl + "?notVerified");
         } else if (exception instanceof InternalAuthenticationServiceException) {
-            response.sendRedirect("/login?notVerified");
+            response.sendRedirect(referrerUrl + "?notVerified");
         } else {
             super.onAuthenticationFailure(request, response, exception);
         }
