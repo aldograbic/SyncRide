@@ -76,10 +76,34 @@
           data-hs-stepper-content-item='{"index": 1}'
           x-show="activeStep === 1"
         >
-          <div
-            class="p-4 h-48 bg-gray-50 flex justify-center items-center border border-dashed border-gray-200 rounded-xl dark:bg-neutral-800 dark:border-neutral-700"
-          >
-            <h3 class="text-gray-500 dark:text-neutral-500">First content</h3>
+          <div>
+            <a
+              href="#"
+              class="p-4 h-48 aspect-square bg-gray-50 text-gray-500 text-sm dark:text-neutral-500 flex flex-col justify-center items-center border border-dashed border-gray-200 rounded-xl dark:bg-neutral-800 dark:border-neutral-700"
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                class="lucide lucide-car-front size-6"
+              >
+                <path
+                  d="m21 8-2 2-1.5-3.7A2 2 0 0 0 15.646 5H8.4a2 2 0 0 0-1.903 1.257L5 10 3 8"
+                />
+                <path d="M7 14h.01" />
+                <path d="M17 14h.01" />
+                <rect width="18" height="8" x="3" y="10" rx="2" />
+                <path d="M5 18v2" />
+                <path d="M19 18v2" />
+              </svg>
+              <span>Novo vozilo</span>
+            </a>
           </div>
         </div>
 
@@ -87,10 +111,39 @@
           data-hs-stepper-content-item='{"index": 2}'
           x-show="activeStep === 2"
         >
-          <div
-            class="p-4 h-48 bg-gray-50 flex justify-center items-center border border-dashed border-gray-200 rounded-xl dark:bg-neutral-800 dark:border-neutral-700"
-          >
-            <h3 class="text-gray-500 dark:text-neutral-500">Second content</h3>
+          <div>
+            <div class="flex gap-2 w-full">
+              <div class="w-full">
+                <label
+                  for="startLocation"
+                  class="block text-sm font-medium mb-2 dark:text-white"
+                  >Početna lokacija</label
+                >
+                <input
+                  type="text"
+                  id="startLocation"
+                  name="startLocation"
+                  class="py-3 px-4 block w-full border-gray-200 rounded-lg text-sm focus:border-emerald-400 focus:ring-emerald-400 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-900 dark:border-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600"
+                  placeholder="Putujem od"
+                  required
+                />
+              </div>
+              <div class="w-full">
+                <label
+                  for="endLocation"
+                  class="block text-sm font-medium mb-2 dark:text-white"
+                  >Završna lokacija</label
+                >
+                <input
+                  type="text"
+                  id="endLocation"
+                  name="endLocation"
+                  class="py-3 px-4 block w-full border-gray-200 rounded-lg text-sm focus:border-emerald-400 focus:ring-emerald-400 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-900 dark:border-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600"
+                  placeholder="Putujem do"
+                  required
+                />
+              </div>
+            </div>
           </div>
         </div>
 
