@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <th:block
+      th:insert="~{fragments/head :: head(title='Moje vožnje | SyncRide')}"
+    ></th:block>
+  </head>
+  <body>
+    <th:block th:insert="~{fragments/header :: header}"></th:block>
+    <main>
+      <div class="px-52 py-4 mt-16">
+        <div>
+          <h2
+            class="text-3xl font-semibold justify-center items-center text-left"
+          >
+            Aktivne vožnje
+          </h2>
+        </div>
+        <div>
+          <h2
+            class="text-3xl font-semibold justify-center items-center text-left"
+          >
+            Povijest vožnji
+          </h2>
+        </div>
+      </div>
+    </main>
+  </body>
+</html>

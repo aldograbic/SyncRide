@@ -13,12 +13,14 @@
 
     <!-- Main Content -->
     <div
-      class="flex items-center justify-center flex-grow"
+      class="flex items-center justify-center flex-grow dark:bg-neutral-900"
       x-show="!showStepper"
     >
       <div class="flex flex-col space-y-2 mb-16">
         <h1 class="text-4xl font-extrabold">Objavite svoju vožnju</h1>
-        <h2 class="pb-4 text-gray-600 text-center text-sm">
+        <h2
+          class="pb-4 text-gray-600 dark:text-neutral-300 text-center text-sm"
+        >
           Povežite se s putnicima koji traže vožnju
         </h2>
         <button
@@ -37,7 +39,7 @@
       x-show="showStepper"
       style="display: none"
       x-transition
-      class="px-52 py-4 mt-16"
+      class="px-52 py-4 mt-16 dark:bg-neutral-900"
     >
       <!-- Stepper Nav -->
       <ul class="relative flex flex-row gap-x-2">
