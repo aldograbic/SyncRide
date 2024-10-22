@@ -2,7 +2,7 @@
 <html lang="en">
   <head>
     <th:block
-      th:insert="~{fragments/head :: head(title='Osobni podaci | SyncRide')}"
+      th:insert="~{fragments/head :: head(title='Prijava i sigurnost | SyncRide')}"
     ></th:block>
   </head>
   <body>
@@ -36,22 +36,24 @@
           <li class="inline-flex items-center">
             <a
               class="flex items-center text-gray-600 hover:text-gray-900 focus:outline-none focus:text-gray-900 dark:text-neutral-500 dark:hover:text-blue-500 dark:focus:text-blue-500"
-              href="/personal-info"
+              href="/login-and-security"
             >
-              Osobni podaci
+              Prijava i sigurnost
             </a>
           </li>
         </ol>
 
+
         <!-- HEADER -->
-        <h1 class="mt-4 text-4xl font-bold text-gray-800">Osobni podaci</h1>
+        <h1 class="mt-4 text-4xl font-bold text-gray-800">Prijava</h1>
         <div class="flex w-full lg:w-2/3 justify-between mt-12">
           <!-- LEFT SIDE: PERSONAL INFO DISPLAY-->
           <div class="w-full">
             <div class="py-4 flex justify-between items-center">
               <div>
                 <p class="font-semibold">Ime i prezime</p>
-                <p class="text-gray-800" th:text="${user.fullName}"></p>
+                <!-- <p class="text-gray-800" th:text="${user.fullName}"> -->
+                </p>
               </div>
               <a href="" class="underline text-sm">Uredi</a>
             </div>
@@ -59,16 +61,19 @@
             <div class="py-4 flex justify-between items-center">
               <div>
                 <p class="font-semibold">E-mail adresa</p>
-                <p class="text-gray-800" th:text="${maskedEmail}"></p>
+                <!-- <p class="text-gray-800" th:text="${user.email}"> -->
+                  g***@gmail.com
+                </p>
               </div>
               <a href="" class="underline text-sm">Uredi</a>
             </div>
-
             <hr />
             <div class="py-4 flex justify-between items-center">
               <div>
                 <p class="font-semibold">Broj telefona</p>
-                <p class="text-gray-800" th:text="${user.phone}"></p>
+                <!-- <p class="text-gray-800" th:text="${user.phone}"> -->
+                  Nije uneseno
+                </p>
               </div>
               <a href="" class="underline text-sm">Uredi</a>
             </div>
@@ -77,7 +82,9 @@
             <div class="py-4 flex justify-between items-center">
               <div>
                 <p class="font-semibold">Adresa</p>
-                <p class="text-gray-800" th:text="${user.address}"></p>
+                <!-- <p class="text-gray-800" th:text="${user.address}"> -->
+                  Nije uneseno
+                </p>
               </div>
               <a href="" class="underline text-sm">Uredi</a>
             </div>

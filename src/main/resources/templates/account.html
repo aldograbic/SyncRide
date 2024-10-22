@@ -2,7 +2,7 @@
 <html lang="en">
   <head>
     <th:block
-      th:insert="~{fragments/head :: head(title='My account | SyncRide')}"
+      th:insert="~{fragments/head :: head(title='Moj račun | SyncRide')}"
     ></th:block>
   </head>
   <body>
@@ -15,8 +15,7 @@
           Račun
         </h1>
         <div class="flex text-lg">
-          <!-- <p th:text="${user.fullName} + ', ' + ${user.email}"></p> -->
-          <p>Goran, gogo.roso@gmail.com</p>
+          <p th:text="${user.fullName} + ', ' + ${user.email}"></p>
         </div>
 
         <div class="flex gap-4 mt-12">

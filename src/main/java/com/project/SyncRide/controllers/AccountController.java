@@ -19,6 +19,7 @@ import com.project.SyncRide.models.user.User;
 import com.project.SyncRide.repositories.user.UserRepository;
 import com.project.SyncRide.services.FileUploadService;
 
+
 @Controller
 @RequestMapping("/account")
 public class AccountController {
@@ -34,19 +35,36 @@ public class AccountController {
     
     @GetMapping
     public String getAccountPage(Model model) {
-
-        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        String username = authentication.getName();
-        User user = userRepository.findByEmail(username);
-        model.addAttribute("user", user);
-        
         return "account";
     }
 
     @GetMapping("/personal-info")
-    public String getPersonalInfoPage() {
-        return "personal-info";
+    public String getPersonalInfoPage(Model model) {
+    // Preuzimanje autentifikovanog korisnika
+    Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+
+    if (authentication != null && authentication.isAuthenticated()) {
+        String username = authentication.getName();  
+
+        User user = userRepository.findByEmail(username);
+
+        if (user != null) {
+            String maskedEmail = maskEmail(user.getEmail());
+            model.addAttribute("user", user);
+            model.addAttribute("maskedEmail", maskedEmail);
+        }
     }
+    return "personal-info"; 
+
+    }
+
+    @GetMapping("/login-and-security")
+    public String getLoginAndSecurityPage(Model model) {
+        return "login-and-security";
+    }
+
+
+    
 
     @PostMapping("/update")
     public String updateAccount(@RequestParam("fullName") String fullName,
@@ -98,5 +116,20 @@ public class AccountController {
         }
 
         return "redirect:/account";
+    }
+
+
+    //metoda za maskiranje maila na racunu korisnika
+    private String maskEmail(String email) {
+        if (email == null || !email.contains("@")) {
+            return email; 
+        }
+        
+        String firstChar = String.valueOf(email.charAt(0));
+        String lastCharBeforeAt = String.valueOf(email.charAt(email.indexOf('@') - 1));
+        String middlePart = email.substring(1, email.indexOf('@') - 1).replaceAll(".", "*");
+        String afterAt = email.substring(email.indexOf('@'));
+        
+        return firstChar + middlePart + lastCharBeforeAt + afterAt;
     }
 }
