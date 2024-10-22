@@ -18,11 +18,11 @@
           <p th:text="${user.fullName} + ', ' + ${user.email}"></p>
         </div>
 
-        <div class="flex gap-4 mt-12">
+        <div class="grid grid-cols-3 gap-4 mt-12">
           <!-- Prva kartica -->
           <a
             href="/account/personal-info"
-            class="block h-[40dvh] w-96 bg-white rounded-2xl shadow-md px-3.5 py-3.5"
+            class="block h-[40dvh] bg-white rounded-2xl shadow-md px-3.5 py-3.5"
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -48,10 +48,35 @@
             </p>
           </a>
 
-          <!-- Druga  -->
+          <!-- Druga kartica -->
           <a
-            href="/login-and-security"
-            class="h-[40dvh] w-96 bg-white rounded-2xl shadow-md px-3.5 py-3.5"
+            href="/account/user-profile"
+            class="block h-[40dvh] bg-white rounded-2xl shadow-md px-3.5 py-3.5"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="40"
+              height="40"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              class="lucide lucide-square-user-round"
+            >
+              <path d="M18 21a6 6 0 0 0-12 0" />
+              <circle cx="12" cy="11" r="4" />
+              <rect width="18" height="18" x="3" y="3" rx="2" />
+            </svg>
+
+            <p class="text-lg font-medium mt-4">Tvoj profil</p>
+            <p class="text-base text-gray-500 mt-2">Tvoj profil</p>
+          </a>
+
+          <!-- Treca  -->
+          <a
+            href="/account/login-and-security"
+            class="h-[40dvh] bg-white rounded-2xl shadow-md px-3.5 py-3.5"
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -75,11 +100,11 @@
             </p>
           </a>
 
-          <!-- Druga  -->
+          <!-- Cetvrta  -->
 
           <a
-            href="/payment-methods"
-            class="h-[40dvh] w-96 bg-white rounded-2xl shadow-md px-3.5 py-3.5"
+            href="/account/payment-methods"
+            class="h-[40dvh] bg-white rounded-2xl shadow-md px-3.5 py-3.5"
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -97,6 +122,33 @@
               <path d="M6 12h.01M18 12h.01" />
             </svg>
             <p class="text-lg font-medium mt-4">Plaćanje i isplate</p>
+            <p class="text-base text-gray-500 mt-2">
+              Pregledajte podatke o plaćanju
+            </p>
+          </a>
+
+          <!-- Peta  -->
+
+          <a
+            href="/account/vehicles"
+            class="h-[40dvh] bg-white rounded-2xl shadow-md px-3.5 py-3.5"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="40"
+              height="40"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              class="lucide lucide-banknote"
+            >
+              <rect width="20" height="12" x="2" y="6" rx="2" />
+              <circle cx="12" cy="12" r="2" />
+              <path d="M6 12h.01M18 12h.01" />
+            </svg>
+            <p class="text-lg font-medium mt-4">Moja vozila</p>
             <p class="text-base text-gray-500 mt-2">
               Pregledajte podatke o plaćanju
             </p>
