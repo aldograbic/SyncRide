@@ -1,6 +1,7 @@
 package com.project.SyncRide.controllers;
 
 import java.io.IOException;
+import java.time.Year;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
@@ -15,7 +16,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.project.SyncRide.models.car.Car;
 import com.project.SyncRide.models.user.User;
+import com.project.SyncRide.repositories.car.CarRepository;
 import com.project.SyncRide.repositories.user.UserRepository;
 import com.project.SyncRide.services.FileUploadService;
 
@@ -26,6 +29,9 @@ public class AccountController {
 
     @Autowired
     private UserRepository userRepository;
+
+    @Autowired
+    private CarRepository carRepository;
 
     @Autowired
     private FileUploadService fileUploadService;
@@ -75,9 +81,36 @@ public class AccountController {
         return "add-vehicle";
     }
 
+    @PostMapping("/vehicles/new")
+    public String insertVehicle(@RequestParam("make") String make,
+                                @RequestParam("model") String model,
+                                @RequestParam("yearOfManufacture") Year yearOfManufacture,
+                                @RequestParam("color") String color,
+                                @RequestParam("seatCount") int seatCount,
+                                @RequestParam(value = "licensePlate", required = false) String licensePlate) {
+
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        String username = authentication.getName();  
+        int userId = userRepository.findByEmail(username).getUserId();
+        
+        Car car = new Car();
+        car.setUserId(userId);
+
+        car.setMake(make);
+        car.setModel(model);
+        car.setYearOfManufacture(yearOfManufacture);
+        car.setColor(color);
+        car.setSeatCount(seatCount);
+        car.setLicensePlate(licensePlate);
+        
+        carRepository.insert(car);
+
+        return "add-vehicle";
+    }
+
     @GetMapping("/profile")
     public String getAccountProfilePage(Model model) {
-        
+
         return "profile";
     }
     
