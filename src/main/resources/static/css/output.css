@@ -901,10 +901,6 @@ button {
   z-index: 0;
 }
 
-.z-10 {
-  z-index: 10;
-}
-
 .z-20 {
   z-index: 20;
 }
@@ -965,14 +961,6 @@ button {
   margin-inline-start: auto !important;
 }
 
-.-ms-px {
-  margin-inline-start: -1px;
-}
-
-.-mt-px {
-  margin-top: -1px;
-}
-
 .mb-0\.5 {
   margin-bottom: 0.125rem;
 }
@@ -989,20 +977,12 @@ button {
   margin-bottom: 0.5rem;
 }
 
-.mb-8 {
-  margin-bottom: 2rem;
-}
-
 .mr-2 {
   margin-right: 0.5rem;
 }
 
 .ms-0\.5 {
   margin-inline-start: 0.125rem;
-}
-
-.ms-1 {
-  margin-inline-start: 0.25rem;
 }
 
 .ms-2 {
@@ -1172,6 +1152,10 @@ button {
   height: 100vh;
 }
 
+.h-full {
+  height: 100%;
+}
+
 .max-h-72 {
   max-height: 18rem;
 }
@@ -1200,12 +1184,16 @@ button {
   width: 2.5rem;
 }
 
-.w-4 {
-  width: 1rem;
+.w-16 {
+  width: 4rem;
 }
 
-.w-40 {
-  width: 10rem;
+.w-2\/3 {
+  width: 66.666667%;
+}
+
+.w-4 {
+  width: 1rem;
 }
 
 .w-8 {
@@ -1218,22 +1206,6 @@ button {
 
 .w-full {
   width: 100%;
-}
-
-.w-2\/3 {
-  width: 66.666667%;
-}
-
-.w-\[90\%\] {
-  width: 90%;
-}
-
-.w-\[95\%\] {
-  width: 95%;
-}
-
-.w-16 {
-  width: 4rem;
 }
 
 .min-w-60 {
@@ -1488,10 +1460,6 @@ button {
   border-radius: 0.125rem !important;
 }
 
-.rounded {
-  border-radius: 0.25rem;
-}
-
 .rounded-2xl {
   border-radius: 1rem;
 }
@@ -1671,22 +1639,9 @@ button {
   padding: 1rem;
 }
 
-.p-8 {
-  padding: 2rem;
-}
-
-.p-6 {
-  padding: 1.5rem;
-}
-
 .\!py-0\.5 {
   padding-top: 0.125rem !important;
   padding-bottom: 0.125rem !important;
-}
-
-.px-2 {
-  padding-left: 0.5rem;
-  padding-right: 0.5rem;
 }
 
 .px-3 {
@@ -1712,11 +1667,6 @@ button {
 .py-0\.5 {
   padding-top: 0.125rem;
   padding-bottom: 0.125rem;
-}
-
-.py-1 {
-  padding-top: 0.25rem;
-  padding-bottom: 0.25rem;
 }
 
 .py-10 {
@@ -1749,6 +1699,16 @@ button {
   padding-bottom: 1rem;
 }
 
+.px-8 {
+  padding-left: 2rem;
+  padding-right: 2rem;
+}
+
+.px-2 {
+  padding-left: 0.5rem;
+  padding-right: 0.5rem;
+}
+
 .pb-4 {
   padding-bottom: 1rem;
 }
@@ -1759,10 +1719,6 @@ button {
 
 .pe-10 {
   padding-inline-end: 2.5rem;
-}
-
-.pe-11 {
-  padding-inline-end: 2.75rem;
 }
 
 .pe-2 {
@@ -1847,11 +1803,6 @@ button {
 .text-xs {
   font-size: 0.75rem;
   line-height: 1rem;
-}
-
-.text-2xl {
-  font-size: 1.5rem;
-  line-height: 2rem;
 }
 
 .\!font-medium {
@@ -1991,17 +1942,6 @@ button {
   box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
 }
 
-.ring-2 {
-  --tw-ring-offset-shadow: var(--tw-ring-inset) 0 0 0 var(--tw-ring-offset-width) var(--tw-ring-offset-color);
-  --tw-ring-shadow: var(--tw-ring-inset) 0 0 0 calc(2px + var(--tw-ring-offset-width)) var(--tw-ring-color);
-  box-shadow: var(--tw-ring-offset-shadow), var(--tw-ring-shadow), var(--tw-shadow, 0 0 #0000);
-}
-
-.ring-white {
-  --tw-ring-opacity: 1;
-  --tw-ring-color: rgb(255 255 255 / var(--tw-ring-opacity));
-}
-
 .blur {
   --tw-blur: blur(8px);
   filter: var(--tw-blur) var(--tw-brightness) var(--tw-contrast) var(--tw-grayscale) var(--tw-hue-rotate) var(--tw-invert) var(--tw-saturate) var(--tw-sepia) var(--tw-drop-shadow);
@@ -2039,12 +1979,6 @@ button {
 
 .transition-colors {
   transition-property: color, background-color, border-color, text-decoration-color, fill, stroke;
-  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
-  transition-duration: 150ms;
-}
-
-.transition-opacity {
-  transition-property: opacity;
   transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
   transition-duration: 150ms;
 }
@@ -2107,22 +2041,12 @@ button {
   border-color: rgb(229 231 235 / var(--tw-border-opacity));
 }
 
-.first\:rounded-t-lg:first-child {
-  border-top-left-radius: 0.5rem;
-  border-top-right-radius: 0.5rem;
-}
-
 .first\:border-transparent:first-child {
   border-color: transparent;
 }
 
 .first\:pt-0:first-child {
   padding-top: 0px;
-}
-
-.last\:rounded-b-lg:last-child {
-  border-bottom-right-radius: 0.5rem;
-  border-bottom-left-radius: 0.5rem;
 }
 
 .last\:pb-0:last-child {
@@ -2202,10 +2126,6 @@ button {
   text-decoration-line: underline;
 }
 
-.focus\:z-10:focus {
-  z-index: 10;
-}
-
 .focus\:border-blue-500:focus {
   --tw-border-opacity: 1;
   border-color: rgb(59 130 246 / var(--tw-border-opacity));
@@ -2219,11 +2139,6 @@ button {
 .focus\:border-emerald-500:focus {
   --tw-border-opacity: 1;
   border-color: rgb(16 185 129 / var(--tw-border-opacity));
-}
-
-.focus\:bg-blue-700:focus {
-  --tw-bg-opacity: 1;
-  background-color: rgb(29 78 216 / var(--tw-bg-opacity));
 }
 
 .focus\:bg-emerald-500:focus {
@@ -2341,14 +2256,6 @@ button {
 }
 
 .hs-dropdown.open > .hs-dropdown-menu > .hs-dropdown-open\:opacity-100 {
-  opacity: 1;
-}
-
-.hs-tooltip.show .hs-tooltip-shown\:visible {
-  visibility: visible;
-}
-
-.hs-tooltip.show .hs-tooltip-shown\:opacity-100 {
   opacity: 1;
 }
 
@@ -2588,11 +2495,6 @@ button {
   border-color: rgb(229 229 229 / var(--tw-border-opacity));
 }
 
-.dark\:border-neutral-500:is(.dark *) {
-  --tw-border-opacity: 1;
-  border-color: rgb(115 115 115 / var(--tw-border-opacity));
-}
-
 .dark\:border-neutral-600:is(.dark *) {
   --tw-border-opacity: 1;
   border-color: rgb(82 82 82 / var(--tw-border-opacity));
@@ -2698,11 +2600,6 @@ button {
 .dark\:shadow-neutral-700\/70:is(.dark *) {
   --tw-shadow-color: rgb(64 64 64 / 0.7);
   --tw-shadow: var(--tw-shadow-colored);
-}
-
-.dark\:ring-neutral-900:is(.dark *) {
-  --tw-ring-opacity: 1;
-  --tw-ring-color: rgb(23 23 23 / var(--tw-ring-opacity));
 }
 
 .dark\:before\:border-neutral-600:is(.dark *)::before {
@@ -2889,20 +2786,8 @@ button {
     margin-right: auto;
   }
 
-  .sm\:mt-0 {
-    margin-top: 0px;
-  }
-
   .sm\:mt-8 {
     margin-top: 2rem;
-  }
-
-  .sm\:flex {
-    display: flex;
-  }
-
-  .sm\:w-auto {
-    width: auto;
   }
 
   .sm\:w-full {
@@ -2937,28 +2822,6 @@ button {
     padding-left: 1.5rem;
     padding-right: 1.5rem;
   }
-
-  .sm\:first\:ms-0:first-child {
-    margin-inline-start: 0px;
-  }
-
-  .sm\:first\:rounded-s-lg:first-child {
-    border-start-start-radius: 0.5rem;
-    border-end-start-radius: 0.5rem;
-  }
-
-  .sm\:first\:rounded-se-none:first-child {
-    border-start-end-radius: 0px;
-  }
-
-  .sm\:last\:rounded-e-lg:last-child {
-    border-start-end-radius: 0.5rem;
-    border-end-end-radius: 0.5rem;
-  }
-
-  .sm\:last\:rounded-es-none:last-child {
-    border-end-start-radius: 0px;
-  }
 }
 
 @media (min-width: 768px) {
@@ -2971,6 +2834,10 @@ button {
     margin-top: 0px;
   }
 
+  .md\:mt-16 {
+    margin-top: 4rem;
+  }
+
   .md\:block {
     display: block;
   }
@@ -2981,6 +2848,10 @@ button {
 
   .md\:grid-cols-2 {
     grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .md\:grid-cols-3 {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
   }
 
   .md\:flex-row {
@@ -3034,6 +2905,11 @@ button {
   .md\:py-3 {
     padding-top: 0.75rem;
     padding-bottom: 0.75rem;
+  }
+
+  .md\:px-52 {
+    padding-left: 13rem;
+    padding-right: 13rem;
   }
 }
 

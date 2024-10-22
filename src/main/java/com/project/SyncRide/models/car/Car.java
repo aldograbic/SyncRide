@@ -1,7 +1,5 @@
 package com.project.SyncRide.models.car;
 
-import java.time.Year;
-
 import com.project.SyncRide.models.user.User;
 
 public class Car {
@@ -9,7 +7,7 @@ public class Car {
     private int userId;
     private String make;
     private String model;
-    private Year yearOfManufacture;
+    private int yearOfManufacture;
     private String color;
     private int seatCount;
     private String licensePlate;
@@ -48,11 +46,11 @@ public class Car {
         this.model = model;
     }
 
-    public Year getYearOfManufacture() {
+    public int getYearOfManufacture() {
         return yearOfManufacture;
     }
 
-    public void setYearOfManufacture(Year yearOfManufacture) {
+    public void setYearOfManufacture(int yearOfManufacture) {
         this.yearOfManufacture = yearOfManufacture;
     }
 

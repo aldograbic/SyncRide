@@ -8,7 +8,7 @@
   <body>
     <th:block th:insert="~{fragments/header :: header}"></th:block>
     <main>
-      <div class="p-4 px-52 py-4 mt-16">
+      <div class="p-4 px-4 md:px-52 py-4 mt-16">
         <h1
           class="text-3xl font-semibold justify-center items-center text-left"
         >
@@ -18,7 +18,7 @@
           <p th:text="${user.fullName} + ', ' + ${user.email}"></p>
         </div>
 
-        <div class="grid grid-cols-3 gap-4 mt-12">
+        <div class="grid md:grid-cols-3 gap-4 mt-12">
           <!-- Prva kartica -->
           <a
             href="/account/personal-info"

@@ -1,7 +1,7 @@
 package com.project.SyncRide.controllers;
 
 import java.io.IOException;
-import java.time.Year;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
@@ -72,6 +72,12 @@ public class AccountController {
     @GetMapping("/vehicles")
     public String getAccountVehiclesPage(Model model) {
 
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        String username = authentication.getName();  
+        int userId = userRepository.findByEmail(username).getUserId();
+
+        List<Car> cars = carRepository.findAllByUserId(userId);
+        model.addAttribute("cars", cars);
         return "my-vehicles";
     }
 
@@ -84,29 +90,38 @@ public class AccountController {
     @PostMapping("/vehicles/new")
     public String insertVehicle(@RequestParam("make") String make,
                                 @RequestParam("model") String model,
-                                @RequestParam("yearOfManufacture") Year yearOfManufacture,
+                                @RequestParam("yearOfManufacture") int yearOfManufacture,
                                 @RequestParam("color") String color,
                                 @RequestParam("seatCount") int seatCount,
-                                @RequestParam(value = "licensePlate", required = false) String licensePlate) {
-
+                                @RequestParam(value = "licensePlate", required = false) String licensePlate,
+                                RedirectAttributes redirectAttributes) {
+    
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         String username = authentication.getName();  
         int userId = userRepository.findByEmail(username).getUserId();
         
         Car car = new Car();
         car.setUserId(userId);
-
-        car.setMake(make);
-        car.setModel(model);
-        car.setYearOfManufacture(yearOfManufacture);
-        car.setColor(color);
-        car.setSeatCount(seatCount);
-        car.setLicensePlate(licensePlate);
         
-        carRepository.insert(car);
-
-        return "add-vehicle";
+        try {
+            car.setMake(make);
+            car.setModel(model);
+            car.setYearOfManufacture(yearOfManufacture);
+            car.setColor(color);
+            car.setSeatCount(seatCount);
+            car.setLicensePlate(licensePlate);
+            
+            carRepository.insert(car);
+            redirectAttributes.addFlashAttribute("successMessage", "Vozilo uspješno dodano!");
+    
+        } catch (Exception e) {
+            redirectAttributes.addFlashAttribute("errorMessage", "Dogodila se pogreška prilikom spremanja vozila. Molimo pokušajte ponovno.");
+            return "redirect:/account/vehicles/new";
+        }
+    
+        return "redirect:/account/vehicles";
     }
+    
 
     @GetMapping("/profile")
     public String getAccountProfilePage(Model model) {

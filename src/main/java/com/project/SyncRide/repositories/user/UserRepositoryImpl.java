@@ -65,7 +65,7 @@ public class UserRepositoryImpl implements UserRepository{
     }
 
     @Override
-    public User findById(Long userId) {
+    public User findById(int userId) {
         String sql = "SELECT user_id, email, full_name, password, gender, address, phone, bio, profile_picture, role, city_id, post_code, created_at, confirmation_token, email_verified FROM users WHERE user_id = ?";
         List<User> users = jdbcTemplate.query(sql, new UserRowMapper(cityRepository), userId);
         return users.isEmpty() ? null : users.get(0);

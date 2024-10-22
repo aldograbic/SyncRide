@@ -10,5 +10,5 @@ public interface UserRepository {
     void update(User user);
     void updateVerification(User user);
     void saveFull(User user);
-    User findById(Long userId);
+    User findById(int userId);
 }

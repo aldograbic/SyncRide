@@ -8,9 +8,13 @@
   <body class="m-0 h-screen flex flex-col">
     <th:block th:insert="~{fragments/header :: header}"></th:block>
     <main>
-      <div class="px-52 py-4 mt-16">
+      <div class="px-4 md:px-52 py-4 md:mt-16">
         <h1 class="text-3xl font-semibold text-gray-800">Dodaj novo vozilo</h1>
-        <form action="/account/vehicles/new" method="post" class="space-y-4">
+        <form
+          action="/account/vehicles/new"
+          method="post"
+          class="space-y-4 mt-12"
+        >
           <div class="w-full">
             <label
               for="make"
