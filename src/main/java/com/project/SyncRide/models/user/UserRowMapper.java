@@ -4,8 +4,19 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import org.springframework.jdbc.core.RowMapper;
+import com.project.SyncRide.models.city.City;
+import com.project.SyncRide.repositories.city.CityRepository;
 
 public class UserRowMapper implements RowMapper<User>{
+
+    
+    private CityRepository cityRepository;
+
+    public UserRowMapper(CityRepository cityRepository){
+        this.cityRepository = cityRepository;
+    };
+
+    
     
     @Override
     public User mapRow(ResultSet rs, int rowNum) throws SQLException {
@@ -25,7 +36,15 @@ public class UserRowMapper implements RowMapper<User>{
         user.setEmailVerified(rs.getBoolean("email_verified"));
         user.setConfirmationToken(rs.getString("confirmation_token"));
         user.setCreatedAt(rs.getTimestamp("created_at"));
+        
+        int cityId = rs.getInt("city_id");
+        City city = cityRepository.getByCityId(cityId);
+        user.setCity(city);
+
+    
 
         return user;
     }
+
+
 }

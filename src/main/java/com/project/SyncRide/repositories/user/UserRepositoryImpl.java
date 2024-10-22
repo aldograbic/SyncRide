@@ -8,9 +8,13 @@ import org.springframework.stereotype.Repository;
 
 import com.project.SyncRide.models.user.User;
 import com.project.SyncRide.models.user.UserRowMapper;
+import com.project.SyncRide.repositories.city.CityRepository;
 
 @Repository
 public class UserRepositoryImpl implements UserRepository{
+
+    @Autowired
+    private CityRepository cityRepository;
     
     @Autowired
     private JdbcTemplate jdbcTemplate;
@@ -18,7 +22,7 @@ public class UserRepositoryImpl implements UserRepository{
     @Override
     public User findByEmail(String email) {
         String sql = "SELECT user_id, email, full_name, password, gender, address, phone, bio, profile_picture, role, city_id, post_code, created_at, confirmation_token, email_verified FROM users WHERE email = ?";
-        List<User> users = jdbcTemplate.query(sql, new UserRowMapper(), email);
+        List<User> users = jdbcTemplate.query(sql, new UserRowMapper(cityRepository), email);
         return users.isEmpty() ? null : users.get(0);
     }
 
@@ -32,7 +36,7 @@ public class UserRepositoryImpl implements UserRepository{
     @Override
     public User findByConfirmationToken(String token) {
         String sql = "SELECT user_id, email, full_name, password, gender, address, phone, bio, profile_picture, role, city_id, post_code, created_at, confirmation_token, email_verified FROM users WHERE confirmation_token = ?";
-        List<User> users = jdbcTemplate.query(sql, new UserRowMapper(), token);
+        List<User> users = jdbcTemplate.query(sql, new UserRowMapper(cityRepository), token);
         return users.isEmpty() ? null : users.get(0);
     }
 
@@ -63,7 +67,7 @@ public class UserRepositoryImpl implements UserRepository{
     @Override
     public User findById(Long userId) {
         String sql = "SELECT user_id, email, full_name, password, gender, address, phone, bio, profile_picture, role, city_id, post_code, created_at, confirmation_token, email_verified FROM users WHERE user_id = ?";
-        List<User> users = jdbcTemplate.query(sql, new UserRowMapper(), userId);
+        List<User> users = jdbcTemplate.query(sql, new UserRowMapper(cityRepository), userId);
         return users.isEmpty() ? null : users.get(0);
     }
 }
