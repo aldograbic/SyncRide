@@ -12,7 +12,7 @@ CREATE TABLE users (
     bio TEXT DEFAULT NULL,
     profile_picture VARCHAR(255) DEFAULT NULL,
     email VARCHAR(100) NOT NULL UNIQUE,
-    password VARCHAR(255) NOT NULL DEFAULT NULL,
+    password VARCHAR(255) DEFAULT NULL,
     city_id INT DEFAULT NULL,
     post_code INT(5) DEFAULT NULL,
     role ENUM('ROLE_USER', 'ROLE_ADMIN') DEFAULT 'ROLE_USER',
@@ -30,7 +30,7 @@ CREATE TABLE user_cars (
     year_of_manufacture YEAR NOT NULL,
     color VARCHAR(50),
     seat_count INT NOT NULL,
-    license_plate VARCHAR(50) NOT NULL,
+    license_plate VARCHAR(50) DEFAULT NULL,
     FOREIGN KEY (user_id) REFERENCES users(user_id) ON DELETE CASCADE
 );
 

@@ -40,30 +40,46 @@ public class AccountController {
 
     @GetMapping("/personal-info")
     public String getPersonalInfoPage(Model model) {
-    // Preuzimanje autentifikovanog korisnika
-    Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 
-    if (authentication != null && authentication.isAuthenticated()) {
-        String username = authentication.getName();  
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 
-        User user = userRepository.findByEmail(username);
+        if (authentication != null && authentication.isAuthenticated()) {
+            String username = authentication.getName();  
 
-        if (user != null) {
-            String maskedEmail = maskEmail(user.getEmail());
-            model.addAttribute("user", user);
-            model.addAttribute("maskedEmail", maskedEmail);
+            User user = userRepository.findByEmail(username);
+
+            if (user != null) {
+                String maskedEmail = maskEmail(user.getEmail());
+                model.addAttribute("user", user);
+                model.addAttribute("maskedEmail", maskedEmail);
+            }
         }
-    }
-    return "personal-info"; 
-
+        return "personal-info"; 
     }
 
     @GetMapping("/login-and-security")
     public String getLoginAndSecurityPage(Model model) {
+
         return "login-and-security";
     }
 
+    @GetMapping("/vehicles")
+    public String getAccountVehiclesPage(Model model) {
 
+        return "my-vehicles";
+    }
+
+    @GetMapping("/vehicles/new")
+    public String getAddVehiclePage(Model model) {
+
+        return "add-vehicle";
+    }
+
+    @GetMapping("/profile")
+    public String getAccountProfilePage(Model model) {
+        
+        return "profile";
+    }
     
 
     @PostMapping("/update")
@@ -118,8 +134,6 @@ public class AccountController {
         return "redirect:/account";
     }
 
-
-    //metoda za maskiranje maila na racunu korisnika
     private String maskEmail(String email) {
         if (email == null || !email.contains("@")) {
             return email; 
