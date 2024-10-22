@@ -1620,11 +1620,6 @@ button {
   padding-bottom: 0.125rem !important;
 }
 
-.px-20 {
-  padding-left: 5rem;
-  padding-right: 5rem;
-}
-
 .px-3 {
   padding-left: 0.75rem;
   padding-right: 0.75rem;
@@ -1930,6 +1925,12 @@ button {
   transition-duration: 150ms;
 }
 
+.transition-\[height\] {
+  transition-property: height;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition-duration: 150ms;
+}
+
 .transition-\[opacity\2c margin\] {
   transition-property: opacity,margin;
   transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
@@ -2067,6 +2068,11 @@ button {
   background-color: rgb(249 250 251 / var(--tw-bg-opacity));
 }
 
+.hover\:text-blue-700:hover {
+  --tw-text-opacity: 1;
+  color: rgb(29 78 216 / var(--tw-text-opacity));
+}
+
 .hover\:text-emerald-500:hover {
   --tw-text-opacity: 1;
   color: rgb(16 185 129 / var(--tw-text-opacity));
@@ -2116,6 +2122,11 @@ button {
   background-color: rgb(249 250 251 / var(--tw-bg-opacity));
 }
 
+.focus\:text-blue-700:focus {
+  --tw-text-opacity: 1;
+  color: rgb(29 78 216 / var(--tw-text-opacity));
+}
+
 .focus\:text-emerald-400:focus {
   --tw-text-opacity: 1;
   color: rgb(52 211 153 / var(--tw-text-opacity));
@@ -2129,6 +2140,10 @@ button {
 .focus\:text-gray-900:focus {
   --tw-text-opacity: 1;
   color: rgb(17 24 39 / var(--tw-text-opacity));
+}
+
+.focus\:underline:focus {
+  text-decoration-line: underline;
 }
 
 .focus\:opacity-80:focus {
@@ -2208,12 +2223,22 @@ button {
   display: none;
 }
 
+.hs-collapse.open .hs-collapse-open\:rotate-180 {
+  --tw-rotate: 180deg;
+  transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
+}
+
 .hs-collapse.open.hs-collapse-open\:block {
   display: block;
 }
 
 .hs-collapse.open.hs-collapse-open\:hidden {
   display: none;
+}
+
+.hs-collapse.open.hs-collapse-open\:rotate-180 {
+  --tw-rotate: 180deg;
+  transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
 }
 
 .hs-collapse-toggle.open .hs-collapse-open\:block {
@@ -2224,12 +2249,22 @@ button {
   display: none;
 }
 
+.hs-collapse-toggle.open .hs-collapse-open\:rotate-180 {
+  --tw-rotate: 180deg;
+  transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
+}
+
 .hs-collapse-toggle.open.hs-collapse-open\:block {
   display: block;
 }
 
 .hs-collapse-toggle.open.hs-collapse-open\:hidden {
   display: none;
+}
+
+.hs-collapse-toggle.open.hs-collapse-open\:rotate-180 {
+  --tw-rotate: 180deg;
+  transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
 }
 
 .open.hs-overlay-open\:mt-7 {
@@ -2598,6 +2633,11 @@ button {
 .dark\:focus\:text-blue-500:focus:is(.dark *) {
   --tw-text-opacity: 1;
   color: rgb(59 130 246 / var(--tw-text-opacity));
+}
+
+.dark\:focus\:text-blue-600:focus:is(.dark *) {
+  --tw-text-opacity: 1;
+  color: rgb(37 99 235 / var(--tw-text-opacity));
 }
 
 .dark\:focus\:text-emerald-500:focus:is(.dark *) {
