@@ -11,57 +11,9 @@
       <th:block
         th:insert="~{fragments/successMessage :: successMessage}"
       ></th:block>
-      <div x-data="{ rides: [], userLocation: null }" class="grid grid-cols-2">
+      <div class="grid grid-cols-2">
         <div></div>
-        <div id="map" class="min-h-screen z-0"></div>
-
-        <script>
-          document.addEventListener("DOMContentLoaded", function () {
-            const map = L.map("map").setView([0, 0], 12);
-
-            L.tileLayer(
-              "https://tiles.stadiamaps.com/tiles/alidade_smooth_dark/{z}/{x}/{y}{r}.png",
-              {
-                maxZoom: 18,
-                attribution:
-                  '&copy; <a href="https://stadiamaps.com/">Stadia Maps</a> contributors',
-              }
-            ).addTo(map);
-
-            if (navigator.geolocation) {
-              navigator.geolocation.getCurrentPosition(function (position) {
-                const userLatLng = [
-                  position.coords.latitude,
-                  position.coords.longitude,
-                ];
-                map.setView(userLatLng, 12);
-
-                L.marker(userLatLng)
-                  .addTo(map)
-                  .bindPopup("You are here")
-                  .openPopup();
-
-                // fetch(
-                //   `/api/rides/nearby?lat=${userLatLng[0]}&lng=${userLatLng[1]}`
-                // )
-                //   .then((response) => response.json())
-                //   .then((data) => {
-                //     data.forEach((ride) => {
-                //       const rideLatLng = [
-                //         ride.startLatitude,
-                //         ride.startLongitude,
-                //       ];
-                //       L.marker(rideLatLng)
-                //         .addTo(map)
-                //         .bindPopup(
-                //           `<b>Ride from: </b>${ride.startLocation}<br><b>To: </b>${ride.endLocation}`
-                //         );
-                //     });
-                //   });
-              });
-            }
-          });
-        </script>
+        <div></div>
       </div>
     </main>
   </body>

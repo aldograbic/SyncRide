@@ -2857,9 +2857,19 @@ button {
 }
 
 @media (min-width: 768px) {
+  .md\:inset-x-0 {
+    left: 0px;
+    right: 0px;
+  }
+
   .md\:mx-auto {
     margin-left: auto;
     margin-right: auto;
+  }
+
+  .md\:mx-0 {
+    margin-left: 0px;
+    margin-right: 0px;
   }
 
   .md\:mt-0 {
@@ -2876,6 +2886,10 @@ button {
 
   .md\:hidden {
     display: none;
+  }
+
+  .md\:w-2\/3 {
+    width: 66.666667%;
   }
 
   .md\:grid-cols-2 {
@@ -2942,6 +2956,11 @@ button {
   .md\:py-3 {
     padding-top: 0.75rem;
     padding-bottom: 0.75rem;
+  }
+
+  .md\:text-4xl {
+    font-size: 2.25rem;
+    line-height: 2.5rem;
   }
 }
 

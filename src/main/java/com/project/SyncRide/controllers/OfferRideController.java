@@ -41,16 +41,18 @@ public class OfferRideController {
 
     @PostMapping("/offer")
     public String offerRide(@RequestParam("carId") int carId,
-            	            @RequestParam("startLocation") String startLocation,
+                            @RequestParam("startLocation") String startLocation,
+                            @RequestParam("startLat") double startLat,
+                            @RequestParam("startLng") double startLng,
                             @RequestParam("endLocation") String endLocation,
+                            @RequestParam("endLat") double endLat,
+                            @RequestParam("endLng") double endLng,
                             @RequestParam("departureTime") LocalDateTime departureTime,
                             @RequestParam("availableSeats") int availableSeats,
                             @RequestParam("pricePerPerson") double pricePerPerson,
                             @RequestParam(value = "additionalInfo", required = false) String additionalInfo,
                             RedirectAttributes redirectAttributes) {
-
-         
-
-        return "redirect:/";                
-    }
+        // Save ride details including locations and coordinates
+        return "redirect:/";
+    }    
 }
