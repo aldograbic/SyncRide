@@ -18,7 +18,7 @@ public class CityRepositoryImpl implements CityRepository{
 
     @Override
     public List<City> getAllCities() {
-        String sql = "SELECT city_id, city_name FROM cities";
+        String sql = "SELECT city_id, city_name FROM cities ORDER BY city_name ASC";
         return jdbcTemplate.query(sql, new BeanPropertyRowMapper<>(City.class));
     }
 

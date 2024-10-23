@@ -2,11 +2,13 @@ package com.project.SyncRide.controllers;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -17,10 +19,16 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.project.SyncRide.models.car.Car;
+import com.project.SyncRide.models.city.City;
 import com.project.SyncRide.models.user.User;
 import com.project.SyncRide.repositories.car.CarRepository;
+import com.project.SyncRide.repositories.city.CityRepository;
 import com.project.SyncRide.repositories.user.UserRepository;
 import com.project.SyncRide.services.FileUploadService;
+
+import jakarta.servlet.ServletException;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 
 
 @Controller
@@ -32,6 +40,9 @@ public class AccountController {
 
     @Autowired
     private CarRepository carRepository;
+
+    @Autowired
+    private CityRepository cityRepository;
 
     @Autowired
     private FileUploadService fileUploadService;
@@ -59,9 +70,63 @@ public class AccountController {
                 model.addAttribute("user", user);
                 model.addAttribute("maskedEmail", maskedEmail);
             }
+            List<City> cities = cityRepository.getAllCities();
+            model.addAttribute("cities", cities);
         }
         return "personal-info"; 
     }
+
+@PostMapping("/personal-info")
+public String updatePersonalInfo(@RequestParam("action") String action, 
+                                 @RequestParam Map<String, String> formData,
+                                 Model model, HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    // Pronađi korisnika
+    Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+    String username = authentication.getName();
+    User user = userRepository.findByEmail(username);
+    List<City> cities = cityRepository.getAllCities();
+    model.addAttribute("cities", cities);
+
+    switch (action) {
+        case "updateName":
+            String fullName = formData.get("fullName");
+            user.setFullName(fullName);
+            break;
+
+        case "updateEmail":
+            String email = formData.get("email");
+            user.setEmail(email);
+            userRepository.update(user);
+            if (authentication != null) {
+                new SecurityContextLogoutHandler().logout(request, response, authentication);
+            }
+            return "redirect:/login"; 
+        
+        case "updatePhone":
+            String phone = formData.get("phone");
+            user.setPhone(phone);
+            break;
+
+        case "updateAddress":
+            String address = formData.get("address");
+            user.setAddress(address);
+            break;
+
+        case "updateCity":
+            int city = Integer.parseInt(formData.get("city"));
+            user.setCityId(city);
+            break;
+
+        case "updatePostCode":
+            int postCode = Integer.parseInt(formData.get("postCode"));
+            user.setPostCode(postCode);
+            break;
+    }
+    userRepository.update(user);
+
+    return "redirect:/account/personal-info";
+}
+
 
     @GetMapping("/login-and-security")
     public String getLoginAndSecurityPage(Model model) {

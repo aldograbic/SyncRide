@@ -11,4 +11,5 @@ public interface UserRepository {
     void updateVerification(User user);
     void saveFull(User user);
     User findById(int userId);
+   
 }

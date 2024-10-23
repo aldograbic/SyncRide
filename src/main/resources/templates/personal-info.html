@@ -7,6 +7,11 @@
   </head>
   <body>
     <th:block th:insert="~{fragments/header :: header}"></th:block>
+    <!-- Zasjenjenje (overlay) -->
+    <div
+      id="overlay"
+      class="fixed inset-0 bg-gray-800 bg-opacity-50 hidden z-10"
+    ></div>
     <main>
       <div class="px-52 py-4 mt-16">
         <!-- BREADCRUMBS-->
@@ -55,49 +60,353 @@
                 <p class="font-semibold">Ime i prezime</p>
                 <p class="text-gray-800" th:text="${user.fullName}"></p>
               </div>
-              <a href="" class="underline text-sm">Uredi</a>
-            </div>
-            <hr />
-            <div class="py-4 flex justify-between items-center">
-              <div>
-                <p class="font-semibold">E-mail adresa</p>
-                <p class="text-gray-800" th:text="${maskedEmail}"></p>
-              </div>
-              <a href="" class="underline text-sm">Uredi</a>
+              <button class="underline text-sm" onclick="editName()">
+                Uredi
+              </button>
             </div>
 
+            <!-- Forma za uređivanje imena i prezimena -->
+            <div
+              id="editNameForm"
+              class="hidden p-4 bg-white rounded-lg shadow-lg z-20 absolute top-20 left-1/4 right-1/4"
+            >
+              <form
+                action="/account/personal-info"
+                method="post"
+                class="space-y-4"
+              >
+                <input type="hidden" name="action" value="updateName" />
+                <div>
+                  <label
+                    for="fullName"
+                    class="block text-sm font-medium text-gray-700"
+                    >Ime</label
+                  >
+                  <input
+                    type="text"
+                    id="fullName"
+                    name="fullName"
+                    th:value="${user.fullName}"
+                    class="mt-1 p-2 border border-gray-300 rounded-md w-full"
+                    required
+                  />
+                </div>
+
+                <div class="flex justify-end space-x-2">
+                  <button
+                    type="submit"
+                    class="bg-blue-500 text-white py-2 px-4 rounded-md"
+                  >
+                    Spremi
+                  </button>
+                  <button
+                    type="button"
+                    class="bg-gray-300 py-2 px-4 rounded-md"
+                    onclick="cancelEdit()"
+                  >
+                    Odustani
+                  </button>
+                </div>
+              </form>
+            </div>
             <hr />
+
+            <!-- E-mail adresa -->
+            <div class="py-4 flex justify-between items-center">
+              <div>
+                <p class="font-semibold">Email adresa</p>
+                <p
+                  id="emailDisplay"
+                  class="text-gray-800"
+                  th:text="${maskedEmail}"
+                ></p>
+              </div>
+              <button class="underline text-sm" onclick="editEmail()">
+                Uredi
+              </button>
+            </div>
+
+            <!--Forma za uređivanje E-mail adresa -->
+            <div
+              id="editEmailForm"
+              class="hidden p-4 bg-white rounded-lg shadow-lg z-20 absolute top-20 left-1/4 right-1/4"
+            >
+              <form
+                action="/account/personal-info"
+                method="post"
+                class="space-y-4"
+              >
+                <input type="hidden" name="action" value="updateEmail" />
+                <div>
+                  <label
+                    for="email"
+                    class="block text-sm font-medium text-gray-700"
+                    >Email</label
+                  >
+                  <input
+                    type="email"
+                    id="email"
+                    name="email"
+                    th:value="${user.email}"
+                    class="mt-1 p-2 border border-gray-300 rounded-md w-full"
+                    required
+                  />
+                </div>
+                <div class="flex justify-end space-x-2">
+                  <button
+                    type="submit"
+                    class="bg-blue-500 text-white py-2 px-4 rounded-md"
+                  >
+                    Spremi
+                  </button>
+                  <button
+                    type="button"
+                    class="bg-gray-300 py-2 px-4 rounded-md"
+                    onclick="cancelEdit()"
+                  >
+                    Odustani
+                  </button>
+                </div>
+              </form>
+            </div>
+            <hr />
+
+            <!-- Broj telefona -->
             <div class="py-4 flex justify-between items-center">
               <div>
                 <p class="font-semibold">Broj telefona</p>
-                <p class="text-gray-800" th:text="${user.phone}"></p>
+                <p
+                  id="phoneDisplay"
+                  class="text-gray-800"
+                  th:text="${user.phone}"
+                ></p>
               </div>
-              <a href="" class="underline text-sm">Uredi</a>
+              <button class="underline text-sm" onclick="editPhone()">
+                Uredi
+              </button>
+            </div>
+            <!-- Forma za uređivanje broja telefona -->
+            <div
+              id="editPhoneForm"
+              class="hidden p-4 bg-white rounded-lg shadow-lg z-20 absolute top-20 left-1/4 right-1/4"
+            >
+              <form
+                action="/account/personal-info"
+                method="post"
+                class="space-y-4"
+              >
+                <input type="hidden" name="action" value="updatePhone" />
+                <div>
+                  <label
+                    for="phone"
+                    class="block text-sm font-medium text-gray-700"
+                    >Broj telefona</label
+                  >
+                  <input
+                    type="phone"
+                    id="phone"
+                    name="phone"
+                    th:value="${user.phone}"
+                    class="mt-1 p-2 border border-gray-300 rounded-md w-full"
+                    required
+                  />
+                </div>
+                <div class="flex justify-end space-x-2">
+                  <button
+                    type="submit"
+                    class="bg-blue-500 text-white py-2 px-4 rounded-md"
+                  >
+                    Spremi
+                  </button>
+                  <button
+                    type="button"
+                    class="bg-gray-300 py-2 px-4 rounded-md"
+                    onclick="cancelEdit()"
+                  >
+                    Odustani
+                  </button>
+                </div>
+              </form>
             </div>
             <hr />
 
+            <!-- Adresa -->
             <div class="py-4 flex justify-between items-center">
               <div>
                 <p class="font-semibold">Adresa</p>
-                <p class="text-gray-800" th:text="${user.address}"></p>
+                <p
+                  id="addressDisplay"
+                  class="text-gray-800"
+                  th:text="${user.address}"
+                ></p>
               </div>
-              <a href="" class="underline text-sm">Uredi</a>
+              <button class="underline text-sm" onclick="editAddress()">
+                Uredi
+              </button>
+            </div>
+            <!-- Forma za uređivanje adrese -->
+            <div
+              id="editAddressForm"
+              class="hidden p-4 bg-white rounded-lg shadow-lg z-20 absolute top-20 left-1/4 right-1/4"
+            >
+              <form
+                action="/account/personal-info"
+                method="post"
+                class="space-y-4"
+              >
+                <input type="hidden" name="action" value="updateAddress" />
+                <div>
+                  <label
+                    for="address"
+                    class="block text-sm font-medium text-gray-700"
+                    >Adresa</label
+                  >
+                  <input
+                    type="address"
+                    id="address"
+                    name="address"
+                    th:value="${user.address}"
+                    class="mt-1 p-2 border border-gray-300 rounded-md w-full"
+                    required
+                  />
+                </div>
+                <div class="flex justify-end space-x-2">
+                  <button
+                    type="submit"
+                    class="bg-blue-500 text-white py-2 px-4 rounded-md"
+                  >
+                    Spremi
+                  </button>
+                  <button
+                    type="button"
+                    class="bg-gray-300 py-2 px-4 rounded-md"
+                    onclick="cancelEdit()"
+                  >
+                    Odustani
+                  </button>
+                </div>
+              </form>
             </div>
             <hr />
+
+            <!-- Grad/općina -->
             <div class="py-4 flex justify-between items-center">
               <div>
                 <p class="font-semibold">Grad/općina</p>
                 <p class="text-gray-800" th:text="${user.city.cityName}"></p>
               </div>
-              <a href="" class="underline text-sm">Uredi</a>
+              <button class="underline text-sm" onclick="editCity()">
+                Uredi
+              </button>
+            </div>
+            <!-- Forma za uređivanje grada -->
+            <div
+              id="editCityForm"
+              class="hidden p-4 bg-white rounded-lg shadow-lg z-20 absolute top-20 left-1/4 right-1/4"
+            >
+              <form
+                action="/account/personal-info"
+                method="post"
+                class="space-y-4"
+              >
+                <input type="hidden" name="action" value="updateCity" />
+                <div>
+                  <label
+                    for="city"
+                    class="block text-sm font-medium text-gray-700"
+                    >Grad/općina</label
+                  >
+                  <select
+                    id="city"
+                    name="city"
+                    class="mt-1 p-2 border border-gray-300 rounded-md w-full"
+                    required
+                  >
+                    <option value="" disabled selected>
+                      Odaberite grad/općinu
+                    </option>
+                    <option
+                      th:each="city : ${cities}"
+                      th:value="${city.cityId}"
+                      th:text="${city.cityName}"
+                    ></option>
+                  </select>
+                </div>
+                <div class="flex justify-end space-x-2">
+                  <button
+                    type="submit"
+                    class="bg-blue-500 text-white py-2 px-4 rounded-md"
+                  >
+                    Spremi
+                  </button>
+                  <button
+                    type="button"
+                    class="bg-gray-300 py-2 px-4 rounded-md"
+                    onclick="cancelEdit()"
+                  >
+                    Odustani
+                  </button>
+                </div>
+              </form>
             </div>
             <hr />
+
+            <!-- Poštanski broj -->
             <div class="py-4 flex justify-between items-center">
               <div>
                 <p class="font-semibold">Poštanski broj</p>
-                <p class="text-gray-800" th:text="${user.postCode}"></p>
+                <p
+                  id="postCodeDisplay"
+                  class="text-gray-800"
+                  th:text="${user.postCode}"
+                ></p>
               </div>
-              <a href="" class="underline text-sm">Uredi</a>
+              <button class="underline text-sm" onclick="editPostCode()">
+                Uredi
+              </button>
+            </div>
+            <!-- Forma za uređivanje poštanskog broja -->
+            <div
+              id="editPostCodeForm"
+              class="hidden p-4 bg-white rounded-lg shadow-lg z-20 absolute top-20 left-1/4 right-1/4"
+            >
+              <form
+                action="/account/personal-info"
+                method="post"
+                class="space-y-4"
+              >
+                <input type="hidden" name="action" value="updatePostCode" />
+                <div>
+                  <label
+                    for="postCode"
+                    class="block text-sm font-medium text-gray-700"
+                    >Poštanski broj</label
+                  >
+                  <input
+                    type="number"
+                    id="postCode"
+                    name="postCode"
+                    th:value="${user.postCode}"
+                    class="mt-1 p-2 border border-gray-300 rounded-md w-full"
+                    required
+                  />
+                </div>
+                <div class="flex justify-end space-x-2">
+                  <button
+                    type="submit"
+                    class="bg-blue-500 text-white py-2 px-4 rounded-md"
+                  >
+                    Spremi
+                  </button>
+                  <button
+                    type="button"
+                    class="bg-gray-300 py-2 px-4 rounded-md"
+                    onclick="cancelEdit()"
+                  >
+                    Odustani
+                  </button>
+                </div>
+              </form>
             </div>
           </div>
         </div>
@@ -105,3 +414,46 @@
     </main>
   </body>
 </html>
+
+<script>
+  function editName() {
+    document.getElementById("editNameForm").classList.remove("hidden");
+    document.getElementById("overlay").classList.remove("hidden");
+  }
+
+  function editEmail() {
+    document.getElementById("editEmailForm").classList.remove("hidden");
+    document.getElementById("overlay").classList.remove("hidden");
+  }
+
+  function editPhone() {
+    document.getElementById("editPhoneForm").classList.remove("hidden");
+    document.getElementById("overlay").classList.remove("hidden");
+  }
+
+  function editAddress() {
+    document.getElementById("editAddressForm").classList.remove("hidden");
+    document.getElementById("overlay").classList.remove("hidden");
+  }
+
+  function editCity() {
+    document.getElementById("editCityForm").classList.remove("hidden");
+    document.getElementById("overlay").classList.remove("hidden");
+  }
+
+  function editPostCode() {
+    document.getElementById("editPostCodeForm").classList.remove("hidden");
+    document.getElementById("overlay").classList.remove("hidden");
+  }
+
+  function cancelEdit() {
+    document.getElementById("editNameForm").classList.add("hidden");
+    document.getElementById("editEmailForm").classList.add("hidden");
+    document.getElementById("editPhoneForm").classList.add("hidden");
+    document.getElementById("editAddressForm").classList.add("hidden");
+    document.getElementById("editCityForm").classList.add("hidden");
+    document.getElementById("editPostCodeForm").classList.add("hidden");
+
+    document.getElementById("overlay").classList.add("hidden");
+  }
+</script>
