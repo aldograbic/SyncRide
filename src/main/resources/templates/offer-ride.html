@@ -52,10 +52,10 @@
       x-show="showStepper"
       style="display: none"
       x-transition
-      class="px-4 md:px-52 py-4 mt-16 dark:bg-neutral-900 h-full"
+      class="px-4 md:px-52 py-4 md:mt-16 dark:bg-neutral-900 h-full"
     >
       <!-- Stepper Nav -->
-      <ul class="relative flex flex-row gap-x-2">
+      <ul class="relative flex flex-row">
         <li data-hs-stepper-nav-item='{"index": 1}'>
           <h1
             class="text-3xl font-semibold justify-center items-center text-left"
@@ -90,7 +90,20 @@
         action="/offer"
         method="POST"
         class="mt-5 sm:mt-8"
-        x-data="{ price: 0, minPrice: 0, maxPrice: 1000, seats: 1, minSeats: 0, maxSeats: 10 }"
+        x-data="{ startLoc: '',
+        endLoc: '',
+        depTime: '',
+        step2Entered: false,
+        get isAnyInputEmpty() {
+          return this.step2Entered && (!this.startLoc || !this.endLoc || !this.depTime);
+        },
+        selected: false, 
+        price: 0, 
+        minPrice: 0, 
+        maxPrice: 1000, 
+        seats: 1, 
+        minSeats: 0, 
+        maxSeats: 10 }"
       >
         <div
           data-hs-stepper-content-item='{"index": 1}'
@@ -126,7 +139,6 @@
             </a>
             <div
               th:each="car : ${cars}"
-              x-data="{ selected: false }"
               x-on:click="selected = !selected"
               :class="selected ? 'bg-emerald-400 text-white border-emerald-400' : 'bg-gray-50 text-gray-500 border-gray-200'"
               class="p-4 h-48 aspect-square cursor-pointer text-sm dark:text-neutral-500 flex flex-col justify-center items-center border rounded-xl dark:bg-neutral-800 dark:border-neutral-700 transition-all duration-300"
@@ -154,6 +166,7 @@
                     type="text"
                     id="startLocation"
                     name="startLocation"
+                    x-model="startLoc"
                     class="py-3 px-4 ps-11 block w-full border-gray-200 rounded-lg text-sm focus:border-emerald-400 focus:ring-emerald-400 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-900 dark:border-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600"
                     placeholder="Putujem od"
                     required
@@ -192,6 +205,7 @@
                     type="text"
                     id="endLocation"
                     name="endLocation"
+                    x-model="endLoc"
                     class="py-3 px-4 ps-11 block w-full border-gray-200 rounded-lg text-sm focus:border-emerald-400 focus:ring-emerald-400 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-900 dark:border-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600"
                     placeholder="Putujem do"
                     required
@@ -241,6 +255,7 @@
                   type="text"
                   id="departureTime"
                   name="departureTime"
+                  x-model="depTime"
                   class="py-3 px-4 ps-11 block w-full border-gray-200 rounded-lg text-sm focus:border-emerald-400 focus:ring-emerald-400 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-900 dark:border-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600"
                   placeholder="Odaberite datum i vrijeme polaska"
                   required
@@ -397,7 +412,7 @@
                 >Cijena po osobi</label
               >
               <div
-                :class="{'border-red-500': price < minPrice || maxPrice > max}"
+                :class="{'border-red-500': price < minPrice || price > maxPrice}"
                 class="py-3 px-4 bg-white border border-gray-200 rounded-lg dark:bg-neutral-900 dark:border-neutral-700"
                 data-hs-input-number='{
                   "step": 1,
@@ -524,9 +539,11 @@
           x-show="activeStep === 3"
         >
           <div
-            class="p-4 h-48 bg-gray-50 flex justify-center items-center border border-dashed border-gray-200 rounded-xl dark:bg-neutral-800 dark:border-neutral-700"
+            class="p-4 bg-gray-50 flex justify-center items-center border border-dashed border-gray-200 rounded-xl dark:bg-neutral-800 dark:border-neutral-700"
           >
-            <h3 class="text-gray-500 dark:text-neutral-500">Third content</h3>
+            <p>Putujem od: <span x-text="startLoc"></span></p>
+            <p>Putujem do: <span x-text="endLoc"></span></p>
+            <p>Krećem u: <span x-text="depTime"></span></p>
           </div>
         </div>
 
@@ -559,8 +576,8 @@
             type="button"
             class="py-2 px-3 inline-flex items-center gap-x-1 text-sm font-medium rounded-lg border border-transparent bg-emerald-400 text-white hover:bg-emerald-500 focus:outline-none focus:bg-emerald-500 disabled:opacity-50 disabled:pointer-events-none"
             x-show="activeStep < 3"
-            @click="activeStep = Math.min(3, activeStep + 1)"
-            :disabled="(price < minPrice || price > maxPrice) || (seats < minSeats || seats > maxSeats)"
+            @click="activeStep = Math.min(3, activeStep + 1), step2Entered = true"
+            :disabled="(isAnyInputEmpty || price < minPrice || price > maxPrice) || (seats < minSeats || seats > maxSeats) || !selected"
           >
             Dalje
             <svg
@@ -621,7 +638,7 @@
         // Initialize the map with the specified location (either user's or default)
         map = new google.maps.Map(document.getElementById("map"), {
           center: initialLocation,
-          zoom: 13,
+          zoom: 11,
         });
 
         directionsService = new google.maps.DirectionsService();
