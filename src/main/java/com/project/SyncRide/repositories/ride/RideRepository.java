@@ -1,9 +1,7 @@
 package com.project.SyncRide.repositories.ride;
 
-import java.util.List;
-
-import com.project.SyncRide.models.ride.RideDTO;
+import com.project.SyncRide.models.ride.Ride;
 
 public interface RideRepository {
-    List<RideDTO> findNearbyRides(double lat, double lng, double maxDistance);
+    void insertRide(Ride ride);
 }

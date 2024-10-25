@@ -909,10 +909,6 @@ button {
   top: 100%;
 }
 
-.z-0 {
-  z-index: 0;
-}
-
 .z-10 {
   z-index: 10;
 }
@@ -1192,10 +1188,6 @@ button {
   min-height: calc(100% - 3.5rem);
 }
 
-.min-h-screen {
-  min-height: 100vh;
-}
-
 .\!w-2\.5 {
   width: 0.625rem !important;
 }
@@ -1206,10 +1198,6 @@ button {
 
 .w-16 {
   width: 4rem;
-}
-
-.w-2\/3 {
-  width: 66.666667%;
 }
 
 .w-4 {
@@ -1761,6 +1749,10 @@ button {
   padding-inline-end: 2.25rem;
 }
 
+.ps-11 {
+  padding-inline-start: 2.75rem;
+}
+
 .ps-2 {
   padding-inline-start: 0.5rem;
 }
@@ -1771,6 +1763,14 @@ button {
 
 .pt-2 {
   padding-top: 0.5rem;
+}
+
+.ps-7 {
+  padding-inline-start: 1.75rem;
+}
+
+.ps-6 {
+  padding-inline-start: 1.5rem;
 }
 
 .text-left {
@@ -2031,6 +2031,16 @@ button {
   transition-timing-function: cubic-bezier(0, 0, 0.2, 1);
 }
 
+.placeholder\:text-sm::-moz-placeholder {
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+}
+
+.placeholder\:text-sm::placeholder {
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+}
+
 .before\:me-6::before {
   content: var(--tw-content);
   margin-inline-end: 1.5rem;
@@ -2156,6 +2166,10 @@ button {
 
 .hover\:underline:hover {
   text-decoration-line: underline;
+}
+
+.focus\:z-10:focus {
+  z-index: 10;
 }
 
 .focus\:border-blue-500:focus {
@@ -2857,19 +2871,14 @@ button {
 }
 
 @media (min-width: 768px) {
-  .md\:inset-x-0 {
-    left: 0px;
-    right: 0px;
+  .md\:mx-0 {
+    margin-left: 0px;
+    margin-right: 0px;
   }
 
   .md\:mx-auto {
     margin-left: auto;
     margin-right: auto;
-  }
-
-  .md\:mx-0 {
-    margin-left: 0px;
-    margin-right: 0px;
   }
 
   .md\:mt-0 {

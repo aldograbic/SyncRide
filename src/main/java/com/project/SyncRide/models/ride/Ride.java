@@ -1,7 +1,7 @@
 package com.project.SyncRide.models.ride;
 
 import java.math.BigDecimal;
-import java.sql.Timestamp;
+import java.time.LocalDateTime;
 
 import com.project.SyncRide.models.car.Car;
 import com.project.SyncRide.models.user.User;
@@ -12,7 +12,11 @@ public class Ride {
     private int carId;
     private String startLocation;
     private String endLocation;
-    private Timestamp departureTime;
+    private double startLatitude;
+    private double startLongitude;
+    private double endLatitude;
+    private double endLongitude;
+    private LocalDateTime departureTime;
     private int availableSeats;
     private BigDecimal pricePerPerson;
     private String additionalInfo;
@@ -50,10 +54,34 @@ public class Ride {
     public void setEndLocation(String endLocation) {
         this.endLocation = endLocation;
     }
-    public Timestamp getDepartureTime() {
+    public double getStartLatitude() {
+        return startLatitude;
+    }
+    public void setStartLatitude(double startLatitude) {
+        this.startLatitude = startLatitude;
+    }
+    public double getStartLongitude() {
+        return startLongitude;
+    }
+    public void setStartLongitude(double startLongitude) {
+        this.startLongitude = startLongitude;
+    }
+    public double getEndLatitude() {
+        return endLatitude;
+    }
+    public void setEndLatitude(double endLatitude) {
+        this.endLatitude = endLatitude;
+    }
+    public double getEndLongitude() {
+        return endLongitude;
+    }
+    public void setEndLongitude(double endLongitude) {
+        this.endLongitude = endLongitude;
+    }
+    public LocalDateTime getDepartureTime() {
         return departureTime;
     }
-    public void setDepartureTime(Timestamp departureTime) {
+    public void setDepartureTime(LocalDateTime departureTime) {
         this.departureTime = departureTime;
     }
     public int getAvailableSeats() {
