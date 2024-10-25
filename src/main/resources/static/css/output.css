@@ -989,10 +989,6 @@ button {
   margin-bottom: 0.5rem;
 }
 
-.ml-2 {
-  margin-left: 0.5rem;
-}
-
 .mr-2 {
   margin-right: 0.5rem;
 }
@@ -1569,6 +1565,11 @@ button {
   border-color: transparent;
 }
 
+.border-red-500 {
+  --tw-border-opacity: 1;
+  border-color: rgb(239 68 68 / var(--tw-border-opacity));
+}
+
 .border-t-transparent {
   border-top-color: transparent;
 }
@@ -1761,16 +1762,12 @@ button {
   padding-inline-start: 1rem;
 }
 
-.pt-2 {
-  padding-top: 0.5rem;
-}
-
 .ps-7 {
   padding-inline-start: 1.75rem;
 }
 
-.ps-6 {
-  padding-inline-start: 1.5rem;
+.pt-2 {
+  padding-top: 0.5rem;
 }
 
 .text-left {
@@ -2031,16 +2028,6 @@ button {
   transition-timing-function: cubic-bezier(0, 0, 0.2, 1);
 }
 
-.placeholder\:text-sm::-moz-placeholder {
-  font-size: 0.875rem;
-  line-height: 1.25rem;
-}
-
-.placeholder\:text-sm::placeholder {
-  font-size: 0.875rem;
-  line-height: 1.25rem;
-}
-
 .before\:me-6::before {
   content: var(--tw-content);
   margin-inline-end: 1.5rem;
@@ -2166,10 +2153,6 @@ button {
 
 .hover\:underline:hover {
   text-decoration-line: underline;
-}
-
-.focus\:z-10:focus {
-  z-index: 10;
 }
 
 .focus\:border-blue-500:focus {

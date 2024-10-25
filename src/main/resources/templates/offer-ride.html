@@ -86,7 +86,12 @@
       <!-- End Stepper Nav -->
 
       <!-- Stepper Content -->
-      <form action="/offer" method="POST" class="mt-5 sm:mt-8">
+      <form
+        action="/offer"
+        method="POST"
+        class="mt-5 sm:mt-8"
+        x-data="{ price: 0, minPrice: 0, maxPrice: 1000, seats: 1, minSeats: 0, maxSeats: 10 }"
+      >
         <div
           data-hs-stepper-content-item='{"index": 1}'
           x-show="activeStep === 1"
@@ -281,6 +286,7 @@
                 >Broj raspoloživih mjesta</label
               >
               <div
+                :class="{'border-red-500': seats < minSeats || seats > maxSeats}"
                 class="py-3 px-4 bg-white border border-gray-200 rounded-lg dark:bg-neutral-900 dark:border-neutral-700"
                 data-hs-input-number='{
                             "step": 1,
@@ -297,6 +303,7 @@
                       type="number"
                       aria-roledescription="Number field"
                       value="1"
+                      x-model="seats"
                       data-hs-input-number-input=""
                       class="p-0 ps-7 block w-full bg-transparent focus:ring-0 [&::-webkit-inner-spin-button]:appearance-none [&::-webkit-outer-spin-button]:appearance-none border-0 border-gray-200 rounded-lg text-sm focus:border-emerald-400 focus:ring-emerald-400 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-900 dark:border-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600"
                       placeholder="Odaberite broj slobodnih mjesta"
@@ -375,6 +382,13 @@
                   </div>
                 </div>
               </div>
+              <p
+                x-show="seats < minSeats || seats > maxSeats"
+                class="text-sm text-red-600 mt-2"
+                id="hs-validation-name-error-helper"
+              >
+                Broj slobodnih mjesta je izvan raspona.
+              </p>
             </div>
             <div class="w-full">
               <label
@@ -383,6 +397,7 @@
                 >Cijena po osobi</label
               >
               <div
+                :class="{'border-red-500': price < minPrice || maxPrice > max}"
                 class="py-3 px-4 bg-white border border-gray-200 rounded-lg dark:bg-neutral-900 dark:border-neutral-700"
                 data-hs-input-number='{
                   "step": 1,
@@ -399,6 +414,7 @@
                       type="number"
                       aria-roledescription="Number field"
                       value="0"
+                      x-model="price"
                       data-hs-input-number-input=""
                       class="p-0 ps-7 block w-full bg-transparent focus:ring-0 [&::-webkit-inner-spin-button]:appearance-none [&::-webkit-outer-spin-button]:appearance-none border-0 border-gray-200 rounded-lg text-sm focus:border-emerald-400 focus:ring-emerald-400 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-900 dark:border-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600"
                       placeholder="Odaberite datum i vrijeme polaska"
@@ -477,6 +493,13 @@
                   </div>
                 </div>
               </div>
+              <p
+                x-show="price < minPrice || price > maxPrice"
+                class="text-sm text-red-600 mt-2"
+                id="hs-validation-name-error-helper"
+              >
+                Cijena je izvan raspona.
+              </p>
             </div>
 
             <div class="w-full">
@@ -537,6 +560,7 @@
             class="py-2 px-3 inline-flex items-center gap-x-1 text-sm font-medium rounded-lg border border-transparent bg-emerald-400 text-white hover:bg-emerald-500 focus:outline-none focus:bg-emerald-500 disabled:opacity-50 disabled:pointer-events-none"
             x-show="activeStep < 3"
             @click="activeStep = Math.min(3, activeStep + 1)"
+            :disabled="(price < minPrice || price > maxPrice) || (seats < minSeats || seats > maxSeats)"
           >
             Dalje
             <svg
