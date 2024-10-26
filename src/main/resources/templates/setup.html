@@ -161,7 +161,21 @@
             <!-- End Stepper Nav -->
 
             <!-- Stepper Content -->
-            <form action="/setup" method="POST" class="mt-5 sm:mt-8">
+            <form
+              action="/setup"
+              method="POST"
+              class="mt-5 sm:mt-8"
+              x-data="{ fullName: '',
+            city: '',
+            address: '',
+            phone: '',
+            get isAnyInputEmpty() {
+              return !this.fullName || !this.city || !this.address || !this.phone;
+            }, 
+            postCode: 10000, 
+            minPostCode: 0, 
+            maxPostCode: 60000 }"
+            >
               <input type="hidden" name="token" th:value="${token}" />
               <!-- First Content -->
               <div
@@ -182,6 +196,7 @@
                       type="text"
                       id="fullName"
                       name="fullName"
+                      x-model="fullName"
                       class="py-3 px-4 block w-full border-gray-200 rounded-lg text-sm focus:border-emerald-400 focus:ring-emerald-400 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-900 dark:border-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600"
                       placeholder="Vaše ime i prezime"
                       required
@@ -261,6 +276,7 @@
                         class="py-3 ps-4 pe-9 block w-full border-gray-200 rounded-lg text-sm focus:border-emerald-400 focus:ring-emerald-400 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-900 dark:border-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600"
                         type="text"
                         id="city"
+                        x-model="city"
                         role="combobox"
                         aria-expanded="false"
                         data-hs-combo-box-input=""
@@ -341,6 +357,7 @@
                       type="text"
                       id="address"
                       name="address"
+                      x-model="address"
                       class="py-3 px-4 block w-full border-gray-200 rounded-lg text-sm focus:border-emerald-400 focus:ring-emerald-400 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-900 dark:border-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600"
                       placeholder="Vaša adresa"
                       required
@@ -354,11 +371,12 @@
                       >Poštanski broj</label
                     >
                     <div
+                      :class="{'border-red-500': postCode < minPostCode || postCode > maxPostCode}"
                       class="py-3 px-4 bg-white border border-gray-200 rounded-lg dark:bg-neutral-900 dark:border-neutral-700"
                       data-hs-input-number='{
                       "step": 10,
                       "min": 0,
-                      "max": 99999
+                      "max": 60000
                     }'
                     >
                       <div
@@ -371,6 +389,7 @@
                             class="w-full p-0 bg-transparent border-0 text-gray-800 focus:ring-0 [&::-webkit-inner-spin-button]:appearance-none [&::-webkit-outer-spin-button]:appearance-none dark:text-white"
                             style="-moz-appearance: textfield"
                             type="number"
+                            x-model="postCode"
                             aria-roledescription="Number field"
                             value="10000"
                             data-hs-input-number-input=""
@@ -427,6 +446,13 @@
                         </div>
                       </div>
                     </div>
+                    <p
+                      x-show="postCode < minPostCode || postCode > maxPostCode"
+                      class="text-sm text-red-600 mt-2"
+                      id="hs-validation-name-error-helper"
+                    >
+                      Poštanski broj je izvan raspona.
+                    </p>
                   </div>
 
                   <div class="w-full">
@@ -439,6 +465,7 @@
                       type="text"
                       id="phone"
                       name="phone"
+                      x-model="phone"
                       class="py-3 px-4 block w-full border-gray-200 rounded-lg text-sm focus:border-emerald-400 focus:ring-emerald-400 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-900 dark:border-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600"
                       placeholder="Vaš broj mobitela"
                       required
@@ -641,7 +668,7 @@
                     <textarea
                       id="bio"
                       name="bio"
-                      class="py-3 px-4 block w-full border-gray-200 rounded-lg text-sm focus:border-emerald-400 focus:ring-emerald-400 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-900 dark:border-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600"
+                      class="py-3 px-4 block w-full resize-none border-gray-200 rounded-lg text-sm focus:border-emerald-400 focus:ring-emerald-400 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-900 dark:border-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600"
                       rows="3"
                       placeholder="Recite nam nešto o sebi"
                     ></textarea>
@@ -824,6 +851,7 @@
                   type="button"
                   class="py-2 px-3 inline-flex items-center gap-x-1 text-sm font-medium rounded-lg border border-transparent bg-emerald-400 text-white hover:bg-emerald-500 focus:outline-none focus:bg-emerald-500 disabled:opacity-50 disabled:pointer-events-none"
                   data-hs-stepper-next-btn=""
+                  :disabled="(isAnyInputEmpty || postCode < minPostCode || postCode > maxPostCode)"
                 >
                   Dalje
                   <svg

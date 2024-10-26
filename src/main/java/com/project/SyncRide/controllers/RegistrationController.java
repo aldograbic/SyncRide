@@ -22,7 +22,6 @@ import com.project.SyncRide.services.EmailService;
 import com.project.SyncRide.services.FileUploadService;
 
 import jakarta.mail.MessagingException;
-import jakarta.servlet.http.HttpSession;
 
 @Controller
 public class RegistrationController {
@@ -63,6 +62,7 @@ public class RegistrationController {
     public String setupUser(@RequestParam("token") String token,
                             @RequestParam("fullName") String fullName,
                             @RequestParam("password") String password,
+                            @RequestParam("confirmPassword") String confirmPassword,
                             @RequestParam("gender") String gender,
                             @RequestParam("address") String address,
                             @RequestParam("cityId") int cityId,
@@ -72,6 +72,11 @@ public class RegistrationController {
                             @RequestParam(value = "profilePicture", required = false) MultipartFile profilePicture,
                             RedirectAttributes redirectAttributes,
                             Model model) {
+
+        if (!password.equals(confirmPassword)) {
+            redirectAttributes.addFlashAttribute("error", "Lozinke se ne poklapaju. Pokušajte ponovno.");
+            return "redirect:/setup?token=" + token;
+        }
 
         User user = userRepository.findByConfirmationToken(token);
         if (user != null && user.isEmailVerified()) {
@@ -100,11 +105,11 @@ public class RegistrationController {
             user.setProfilePicture(profilePictureUrl);
             userRepository.saveFull(user);
 
-            model.addAttribute("success", "Registracija završena! Sada se možete prijaviti.");
-            return "login";
+            redirectAttributes.addFlashAttribute("success", "Registracija završena! Sada se možete prijaviti.");
+            return "redirect:/login";
         } else {
-            model.addAttribute("error", "Nevažeći token, molimo kontaktirajte podršku.");
-            return "login";
+            redirectAttributes.addFlashAttribute("error", "Nevažeći token, molimo kontaktirajte podršku.");
+            return "redirect:/login";
         }
     }
 
@@ -123,7 +128,6 @@ public class RegistrationController {
             user.setConfirmationToken(confirmationToken);
             userRepository.save(user);
 
-            // String confirmationLink = "http://localhost:8080/confirm?token=" + confirmationToken;
             try {
                 emailService.sendConfirmationEmail(email, confirmationToken);
             } catch (MessagingException e) {
