@@ -134,6 +134,47 @@ public String updatePersonalInfo(@RequestParam("action") String action,
         return "login-and-security";
     }
 
+
+
+    @PostMapping("/login-and-security")
+    public String editLoginAndSecurity(@RequestParam("password") String newPassword,
+                                        @RequestParam("action") String action,
+                                        RedirectAttributes redirectAttributes, HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse){
+
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        String username = authentication.getName();
+        User user = userRepository.findByEmail(username);
+
+
+        if(user == null){
+            redirectAttributes.addFlashAttribute("error", "Korisnik ne postoji");
+            return "redirect:/account/login-and-security";
+        }
+
+
+        if("updatePassword".equals(action)){
+            if(passwordEncoder.matches(newPassword, user.getPassword())){
+                redirectAttributes.addFlashAttribute("error", "Nova lozinka je identična kao stara");
+            }else{
+                String encryptedPassword = passwordEncoder.encode(newPassword);
+                userRepository.updatePassword(user, encryptedPassword);
+                redirectAttributes.addFlashAttribute("success", "Uspješno ste promijenili lozinku!");
+                return "redirect:/account/login-and-security"; 
+            }
+        }
+
+        else if("deleteUserAccount".equals(action)){
+            userRepository.deleteUser(user);
+            if (authentication != null) {
+                new SecurityContextLogoutHandler().logout(httpServletRequest, httpServletResponse, authentication);
+            }
+            redirectAttributes.addFlashAttribute("success", "Uspješno ste izbrisali svoj korisnički račun!");
+            return "redirect:/login";
+        }
+        return "redirect:/account/login-and-security"; 
+}
+
+    
     @GetMapping("/vehicles")
     public String getAccountVehiclesPage(Model model) {
 

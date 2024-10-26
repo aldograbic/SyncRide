@@ -8,8 +8,10 @@ public interface UserRepository {
     User findByConfirmationToken(String token);
     void save(User user);
     void update(User user);
+    void deleteUser(User user);
     void updateVerification(User user);
     void saveFull(User user);
     User findById(int userId);
+    void updatePassword(User user, String password);
    
 }

@@ -70,4 +70,16 @@ public class UserRepositoryImpl implements UserRepository{
         List<User> users = jdbcTemplate.query(sql, new UserRowMapper(cityRepository), userId);
         return users.isEmpty() ? null : users.get(0);
     }
+
+    @Override
+    public void updatePassword(User user, String password){
+        String sql = "UPDATE users SET password = ? WHERE user_id = ?";
+        jdbcTemplate.update(sql, password, user.getUserId()); 
+    }
+
+    @Override
+    public void deleteUser(User user){
+        String sql = "DELETE FROM users WHERE user_id = ?";
+        jdbcTemplate.update(sql, user.getUserId());
+    }
 }
