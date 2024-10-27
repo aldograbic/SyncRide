@@ -53,7 +53,11 @@
         <div
           class="mt-12 bg-white rounded-xl shadow p-4 sm:p-7 dark:bg-neutral-800"
         >
-          <form>
+          <form
+            action="/account/update"
+            method="POST"
+            enctype="multipart/form-data"
+          >
             <!-- Grid -->
             <div class="grid sm:grid-cols-12 gap-2 sm:gap-6">
               <div class="sm:col-span-3">
@@ -65,48 +69,77 @@
               </div>
               <!-- End Col -->
 
-              <div class="sm:col-span-9">
+              <div class="sm:col-span-9" x-data="{ imagePreview: null }">
                 <div class="flex items-center gap-5">
-                  <div sec:authorize="isAuthenticated()">
+                  <template x-if="imagePreview">
                     <img
-                      th:if="${user.profilePicture}"
+                      class="shrink-0 size-16 rounded-full"
+                      :src="imagePreview"
+                      alt="Preview of user profile picture"
+                    />
+                  </template>
+
+                  <template x-if="!imagePreview" th:if="${user.profilePicture}">
+                    <img
+                      class="shrink-0 size-16 rounded-full"
                       th:src="${user.profilePicture}"
-                      class="w-16 h-auto rounded-full"
                       alt="User profile picture"
                     />
+                  </template>
+
+                  <template
+                    x-if="!imagePreview"
+                    th:unless="${user.profilePicture}"
+                  >
                     <div
-                      th:unless="${user.profilePicture}"
-                      th:text="${#strings.substring(user.fullName,0,1)}"
+                      th:text="${#strings.substring(user.fullName, 0, 1)}"
                       class="shrink-0 size-16 rounded-full grid place-items-center text-3xl text-gray-800 dark:text-neutral-200 bg-gray-100 dark:bg-neutral-700"
                     ></div>
-                  </div>
+                  </template>
+
                   <div class="flex gap-x-2">
-                    <div>
-                      <button
-                        type="button"
-                        class="py-2 px-3 inline-flex items-center gap-x-2 text-sm font-medium rounded-lg border border-gray-200 bg-white text-gray-800 shadow-sm hover:bg-gray-50 disabled:opacity-50 disabled:pointer-events-none focus:outline-none focus:bg-gray-50 dark:bg-transparent dark:border-neutral-700 dark:text-neutral-300 dark:hover:bg-neutral-800 dark:focus:bg-neutral-800"
+                    <button
+                      type="button"
+                      @click="$refs.fileInput.click()"
+                      class="py-2 px-3 inline-flex items-center gap-x-2 text-sm font-medium rounded-lg border border-gray-200 bg-white text-gray-800 shadow-sm hover:bg-gray-100 disabled:opacity-50 disabled:pointer-events-none focus:outline-none focus:bg-gray-100 dark:bg-transparent dark:border-neutral-700 dark:text-neutral-300 dark:hover:bg-neutral-700 dark:focus:bg-neutral-700"
+                    >
+                      <svg
+                        class="shrink-0 size-4"
+                        xmlns="http://www.w3.org/2000/svg"
+                        width="24"
+                        height="24"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="2"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
                       >
-                        <svg
-                          class="shrink-0 size-4"
-                          xmlns="http://www.w3.org/2000/svg"
-                          width="24"
-                          height="24"
-                          viewBox="0 0 24 24"
-                          fill="none"
-                          stroke="currentColor"
-                          stroke-width="2"
-                          stroke-linecap="round"
-                          stroke-linejoin="round"
-                        >
-                          <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
-                          <polyline points="17 8 12 3 7 8" />
-                          <line x1="12" x2="12" y1="3" y2="15" />
-                        </svg>
-                        Prenesite sliku
-                      </button>
-                    </div>
+                        <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
+                        <polyline points="17 8 12 3 7 8" />
+                        <line x1="12" x2="12" y1="3" y2="15" />
+                      </svg>
+                      Prenesite sliku
+                    </button>
                   </div>
                 </div>
+
+                <input
+                  type="file"
+                  name="profilePicture"
+                  x-ref="fileInput"
+                  class="hidden"
+                  @change="
+                    const file = $refs.fileInput.files[0];
+                    if (file) {
+                      const reader = new FileReader();
+                      reader.onload = (e) => {
+                        imagePreview = e.target.result;
+                      };
+                      reader.readAsDataURL(file);
+                    }
+                  "
+                />
               </div>
               <!-- End Col -->
 

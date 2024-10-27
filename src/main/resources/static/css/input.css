@@ -11,6 +11,10 @@
     @apply dark:bg-neutral-900;
   }
 
+  [x-cloak] {
+    @apply hidden;
+  }
+
   h1 {
     @apply dark:text-neutral-100;
   }

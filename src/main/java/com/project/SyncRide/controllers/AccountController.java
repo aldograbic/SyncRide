@@ -188,10 +188,10 @@ public String updatePersonalInfo(@RequestParam("action") String action,
     }
 
     @GetMapping("/vehicles/new")
-    public String getAddVehiclePage(Model model) {
-
+    public String getAddVehiclePage(Model model, @RequestParam(value = "redirectUrl", required = false) String redirectUrl) {
+        model.addAttribute("redirectUrl", redirectUrl != null ? redirectUrl : "/account/vehicles");
         return "add-vehicle";
-    }
+    }      
 
     @PostMapping("/vehicles/new")
     public String insertVehicle(@RequestParam("make") String make,
@@ -200,6 +200,7 @@ public String updatePersonalInfo(@RequestParam("action") String action,
                                 @RequestParam("color") String color,
                                 @RequestParam("seatCount") int seatCount,
                                 @RequestParam(value = "licensePlate", required = false) String licensePlate,
+                                @RequestParam(value = "redirectUrl", defaultValue = "/account/vehicles") String redirectUrl,
                                 RedirectAttributes redirectAttributes) {
     
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
@@ -225,7 +226,7 @@ public String updatePersonalInfo(@RequestParam("action") String action,
             return "redirect:/account/vehicles/new";
         }
     
-        return "redirect:/account/vehicles";
+        return "redirect:" + (redirectUrl != null ? redirectUrl : "/account/vehicles");
     }
     
 

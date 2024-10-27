@@ -14,7 +14,15 @@
           action="/account/vehicles/new"
           method="post"
           class="space-y-4 mt-12"
+          x-data="{
+            seats: 1, 
+            minSeats: 0, 
+            maxSeats: 10,
+            year: 2024,
+            minYear: 1800,
+            maxYear: 2024}"
         >
+          <input type="hidden" name="redirectUrl" th:value="${redirectUrl}" />
           <div class="w-full">
             <label
               for="make"
@@ -52,10 +60,11 @@
               >Godina proizvodnje</label
             >
             <div
+              :class="{'border-red-500': year < minYear || year > maxYear}"
               class="py-3 px-4 bg-white border border-gray-200 rounded-lg dark:bg-neutral-900 dark:border-neutral-700"
               data-hs-input-number='{
               "step": 1,
-              "min": 1800,
+              "min": 0,
               "max": 2024
             }'
             >
@@ -64,6 +73,7 @@
                   <input
                     id="yearOfManufacture"
                     name="yearOfManufacture"
+                    x-model="year"
                     class="w-full p-0 bg-transparent border-0 text-gray-800 focus:ring-0 [&::-webkit-inner-spin-button]:appearance-none [&::-webkit-outer-spin-button]:appearance-none dark:text-white"
                     style="-moz-appearance: textfield"
                     type="number"
@@ -122,6 +132,13 @@
                 </div>
               </div>
             </div>
+            <p
+              x-cloak
+              x-show="year < minYear || year > maxYear"
+              class="text-sm text-red-600 mt-2"
+            >
+              Godina proizvodnje vozila je izvan raspona.
+            </p>
           </div>
           <div class="w-full">
             <label
@@ -145,10 +162,11 @@
               >Broj sjedala</label
             >
             <div
+              :class="{'border-red-500': seats < minSeats || seats > maxSeats}"
               class="py-3 px-4 bg-white border border-gray-200 rounded-lg dark:bg-neutral-900 dark:border-neutral-700"
               data-hs-input-number='{
               "step": 1,
-              "min": 0,
+              "min": 1,
               "max": 10
             }'
             >
@@ -157,11 +175,12 @@
                   <input
                     id="seatCount"
                     name="seatCount"
+                    x-model="seats"
                     class="w-full p-0 bg-transparent border-0 text-gray-800 focus:ring-0 [&::-webkit-inner-spin-button]:appearance-none [&::-webkit-outer-spin-button]:appearance-none dark:text-white"
                     style="-moz-appearance: textfield"
                     type="number"
                     aria-roledescription="Number field"
-                    value="0"
+                    value="1"
                     data-hs-input-number-input=""
                     required
                   />
@@ -215,6 +234,13 @@
                 </div>
               </div>
             </div>
+            <p
+              x-cloak
+              x-show="seats < minSeats || seats > maxSeats"
+              class="text-sm text-red-600 mt-2"
+            >
+              Broj slobodnih sjedala je izvan raspona.
+            </p>
           </div>
           <div class="w-full">
             <label
@@ -231,6 +257,7 @@
             />
           </div>
           <button
+            :disabled="(year < minYear || year > maxYear || seats < minSeats || seats > maxSeats)"
             type="submit"
             class="py-2 px-3 inline-flex w-full justify-center items-center gap-x-2 text-sm font-medium rounded-lg border border-transparent bg-emerald-400 text-white hover:bg-emerald-500 focus:outline-none focus:bg-emerald-500 disabled:opacity-50 disabled:pointer-events-none"
           >
