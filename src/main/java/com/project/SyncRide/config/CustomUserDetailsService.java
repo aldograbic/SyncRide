@@ -6,7 +6,6 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
-import org.springframework.security.web.authentication.SavedRequestAwareAuthenticationSuccessHandler;
 import org.springframework.stereotype.Service;
 
 import com.project.SyncRide.models.user.User;
@@ -14,7 +13,7 @@ import com.project.SyncRide.repositories.user.UserRepository;
 
 
 @Service
-public class CustomUserDetailsService extends SavedRequestAwareAuthenticationSuccessHandler implements UserDetailsService {
+public class CustomUserDetailsService implements UserDetailsService {
     
     private UserRepository userRepository;
 

@@ -54,8 +54,8 @@ public class UserRepositoryImpl implements UserRepository{
 
     @Override
     public void updateVerification(User user) {
-        String sql = "UPDATE users SET email_verified = ?";
-        jdbcTemplate.update(sql, user.isEmailVerified());
+        String sql = "UPDATE users SET email_verified = ? WHERE user_id = ?";
+        jdbcTemplate.update(sql, user.isEmailVerified(), user.getUserId());
     }
 
     @Override
