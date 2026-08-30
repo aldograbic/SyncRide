@@ -6,6 +6,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
@@ -32,6 +33,9 @@ public class OfferRideController {
 
     @Autowired
     private RideRepository rideRepository;
+
+    @Value("${google.maps.api-key}")
+    private String googleMapsApiKey;
     
     @GetMapping("/offer")
     public String getOfferRidePage(Model model) {
@@ -42,6 +46,7 @@ public class OfferRideController {
 
         List<Car> cars = carRepository.findAllByUserId(userId);
         model.addAttribute("cars", cars);
+        model.addAttribute("googleMapsApiKey", googleMapsApiKey);
 
         return "offer-ride";
     }
